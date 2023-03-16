@@ -1,11 +1,12 @@
-package model.pieces;
+package entities.pieces;
 
-import model.Space;
-import model.pieces.Color;
+import entities.Color;
+import entities.Space;
 
 
 public abstract class Piece {
 	private Space currentSpace;
+	private Color color;
 	
 	public Piece(Space currentSpace) {
 		this.currentSpace = currentSpace;
@@ -19,5 +20,13 @@ public abstract class Piece {
 	
 	public void setSpace(Space space) {
 		this.currentSpace = space;
+	}
+	
+	public Color getColor() {
+		return this.color;
+	}
+	
+	public void setColor(Color color) {
+		this.color = color;
 	}
 }

@@ -1,19 +1,17 @@
-package model;
+package entities;
 
-import model.pieces.Piece;
-import model.pieces.Color;
+import entities.Color;
 
 public class Space {
 	private int xCoord;
 	private int yCoord;
 	private Color color;
-	private Piece piece;
+	private boolean isOccupied;
 	
-	public Space(int xCoord, int yCoord, Color color, Piece piece) {
+	public Space(int xCoord, int yCoord, Color color) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.color = color;
-		this.piece = piece;
 	}
 	
 	public int getXCoord() {
@@ -39,17 +37,12 @@ public class Space {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
-	public Piece getPiece() {
-		return this.piece;
+
+	public boolean getIsOccupied() {
+		return this.isOccupied;
 	}
 	
-	public void setPiece(Piece piece) {
-		this.piece = piece;
-	}
-	
-	public void shift(int xShift, int yShift) {
-		this.xCoord += xShift;
-		this.yCoord += yShift;
+	public void setIsOccupied(boolean isOccupied) {
+		this.isOccupied = isOccupied;
 	}
 }

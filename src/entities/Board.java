@@ -1,4 +1,4 @@
-package model;
+package entities;
 
 public class Board {
 	private Space[] spaces = new Space[64];

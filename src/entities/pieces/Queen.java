@@ -1,6 +1,6 @@
-package model.pieces;
+package entities.pieces;
 
-import model.Space;
+import entities.Space;
 
 public class Queen extends Piece {
 	
