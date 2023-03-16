@@ -7,7 +7,7 @@ import entities.Space;
 public abstract class Piece {
 	private Space currentSpace;
 	private Color color;
-	
+
 	public Piece(Space currentSpace) {
 		this.currentSpace = currentSpace;
 	}
