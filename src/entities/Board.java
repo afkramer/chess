@@ -1,5 +1,7 @@
 package entities;
 
+import entities.enums.Color;
+
 public class Board {
 	private Space[] spaces = new Space[64];
 	

@@ -1,6 +1,6 @@
 package entities;
 
-import entities.Color;
+import entities.enums.Color;
 
 public class Space {
 	private int xCoord;

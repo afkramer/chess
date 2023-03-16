@@ -1,7 +1,7 @@
 package entities.pieces;
 
-import entities.Color;
 import entities.Space;
+import entities.enums.Color;
 
 
 public abstract class Piece {
