@@ -10,7 +10,7 @@ public class Space {
 	private List<Space> linearAdjacents;
 	private List<Space> diagonalAdjacents;
 	private Color color;
-	private boolean isOccupied;
+	private boolean isFree;
 	
 	public Space(int xCoord, int yCoord, List<Space> linearAdjacents, List<Space> diagonalAdjacents, Color color) {
 		this.xCoord = xCoord;
@@ -18,7 +18,7 @@ public class Space {
 		this.linearAdjacents = linearAdjacents;
 		this.diagonalAdjacents = diagonalAdjacents;
 		this.color = color;
-		this.isOccupied = false;
+		this.isFree = true;
 	}
 	
 	public Space(int xCoord, int yCoord, Color color) {
@@ -65,11 +65,11 @@ public class Space {
 		this.color = color;
 	}
 
-	public boolean getIsOccupied() {
-		return this.isOccupied;
+	public boolean getIsFree() {
+		return this.isFree;
 	}
 	
-	public void setIsOccupied(boolean isOccupied) {
-		this.isOccupied = isOccupied;
+	public void setIsFree(boolean isFree) {
+		this.isFree = isFree;
 	}
 }

@@ -27,7 +27,7 @@ public class Board {
 	
 	public boolean isSpaceFree(int xCoord, int yCoord) {
 		for(Space space : spaces) {
-			if (space.getXCoord() == xCoord && space.getYCoord() == yCoord && !space.getIsOccupied()) {
+			if (space.getXCoord() == xCoord && space.getYCoord() == yCoord && space.getIsFree()) {
 				return true;
 			}
 		}
