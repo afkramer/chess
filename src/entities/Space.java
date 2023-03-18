@@ -5,26 +5,23 @@ import entities.enums.Color;
 public class Space {
 	private int xCoord;
 	private int yCoord;
-	private Space neighborNorth;
-	private Space neighborEast;
-	private Space neighborSouth;
-	private Space neighborWest;
+	private Space[] linearAdjacents;
+	private Space[] diagonalAdjacents;
 	private Color color;
 	private boolean isOccupied;
 	
-	public Space(int xCoord, int yCoord, Space neighborNorth, Space neighborEast,
-					Space neighborSouth, Space neighborWest, Color color) {
+	public Space(int xCoord, int yCoord, Space[] linearAdjacents, Space[] diagonalAdjacents, Color color) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
-		this.neighborNorth = neighborNorth;
-		this.neighborEast = neighborEast;
-		this.neighborSouth = neighborSouth;
-		this.neighborWest = neighborWest;
+		this.linearAdjacents = linearAdjacents;
+		this.diagonalAdjacents = diagonalAdjacents;
 		this.color = color;
+		// ASK: does it make sense to set instance variable values to the default value?
+		this.isOccupied = false;
 	}
 	
 	public Space(int xCoord, int yCoord, Color color) {
-		this(xCoord, yCoord, null, null, null, null, color);
+		this(xCoord, yCoord, null, null, color);
 	}
 	
 	public int getXCoord() {
@@ -43,36 +40,20 @@ public class Space {
 		this.yCoord = yCoord;
 	}
 	
-	public Space getNeighborNorth() {
-		return neighborNorth;
+	public Space[] getLinearAdjacents() {
+		return this.linearAdjacents;
 	}
-
-	public void setNeighborNorth(Space neighborNorth) {
-		this.neighborNorth = neighborNorth;
+	
+	public void setLinearAdjacents(Space[] linearAdjacents) {
+		this.linearAdjacents = linearAdjacents;
 	}
-
-	public Space getNeighborEast() {
-		return neighborEast;
+	
+	public Space[] getDiagonalAdjacents() {
+		return this.diagonalAdjacents;
 	}
-
-	public void setNeighborEast(Space neighborEast) {
-		this.neighborEast = neighborEast;
-	}
-
-	public Space getNeighborSouth() {
-		return neighborSouth;
-	}
-
-	public void setNeighborSouth(Space neighborSouth) {
-		this.neighborSouth = neighborSouth;
-	}
-
-	public Space getNeighborWest() {
-		return neighborWest;
-	}
-
-	public void setNeighborWest(Space neighborWest) {
-		this.neighborWest = neighborWest;
+	
+	public void setDiagonalAdjacents(Space[] diagonalAdjacents) {
+		this.diagonalAdjacents = diagonalAdjacents;
 	}
 
 	public Color getColor() {

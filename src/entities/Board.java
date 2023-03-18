@@ -15,6 +15,7 @@ public class Board {
 		Color color = Color.BLACK;
 		for (Space space : spaces) {
 			space = new Space(xCoord, yCoord, color);
+			color = color.switchColor();
 		}
 	}
 	

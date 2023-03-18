@@ -5,4 +5,8 @@ public enum Color {
 	BLACK;
 	
 	private Color() {}
+	
+	public Color switchColor() {
+		return this == WHITE ? BLACK : WHITE;
+	}
 }
