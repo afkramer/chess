@@ -1,22 +1,23 @@
 package entities;
 
+import java.util.List;
+
 import entities.enums.Color;
 
 public class Space {
 	private int xCoord;
 	private int yCoord;
-	private Space[] linearAdjacents;
-	private Space[] diagonalAdjacents;
+	private List<Space> linearAdjacents;
+	private List<Space> diagonalAdjacents;
 	private Color color;
 	private boolean isOccupied;
 	
-	public Space(int xCoord, int yCoord, Space[] linearAdjacents, Space[] diagonalAdjacents, Color color) {
+	public Space(int xCoord, int yCoord, List<Space> linearAdjacents, List<Space> diagonalAdjacents, Color color) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.linearAdjacents = linearAdjacents;
 		this.diagonalAdjacents = diagonalAdjacents;
 		this.color = color;
-		// ASK: does it make sense to set instance variable values to the default value?
 		this.isOccupied = false;
 	}
 	
@@ -40,19 +41,19 @@ public class Space {
 		this.yCoord = yCoord;
 	}
 	
-	public Space[] getLinearAdjacents() {
+	public List<Space> getLinearAdjacents() {
 		return this.linearAdjacents;
 	}
 	
-	public void setLinearAdjacents(Space[] linearAdjacents) {
+	public void setLinearAdjacents(List<Space> linearAdjacents) {
 		this.linearAdjacents = linearAdjacents;
 	}
 	
-	public Space[] getDiagonalAdjacents() {
+	public List<Space> getDiagonalAdjacents() {
 		return this.diagonalAdjacents;
 	}
 	
-	public void setDiagonalAdjacents(Space[] diagonalAdjacents) {
+	public void setDiagonalAdjacents(List<Space> diagonalAdjacents) {
 		this.diagonalAdjacents = diagonalAdjacents;
 	}
 
