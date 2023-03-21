@@ -8,6 +8,7 @@ public class Board {
 	
 	public Board() {
 		this.initBoard();
+		this.initPieces();
 	}
 	
 	public void initBoard() {
@@ -23,6 +24,11 @@ public class Board {
 			// Last square of row below is same color as first square of row above
 			color = color.switchColor();
 		}
+	}
+
+	//TODO:
+	public void initPieces() {
+		
 	}
 	
 	public boolean isSpaceFree(int xCoord, int yCoord) {

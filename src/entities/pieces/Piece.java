@@ -8,11 +8,14 @@ public abstract class Piece {
 	private Space currentSpace;
 	private Color color;
 
-	public Piece(Space currentSpace) {
+	public Piece(Space currentSpace, Color color) {
 		this.currentSpace = currentSpace;
+		this.color = color;
 	}
 	
 	public abstract void move(Space space);
+	
+	public abstract boolean isMoveValid(Space space);
 	
 	public Space getSpace() {
 		return this.currentSpace;

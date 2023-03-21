@@ -3,10 +3,11 @@ package entities.pieces;
 import entities.Space;
 import entities.enums.Color;
 
-public class Queen extends Piece {
+public class Bishop extends Piece {
+	int[][] allowableMoves = {{1, 1}, {1, -1}, {-1, -1}, {-1, 1}};
 	
-	public Queen(Space space, Color color) {
-		super(space, color);
+	public Bishop(Space currentSpace, Color color) {
+		super(currentSpace, color);
 	}
 	
 	public void move(Space targetSpace) {
@@ -16,4 +17,6 @@ public class Queen extends Piece {
 	public boolean isMoveValid(Space targetSpace) {
 		return false;
 	}
+	
+	
 }
