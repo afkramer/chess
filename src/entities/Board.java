@@ -18,6 +18,7 @@ public class Board {
 			for (int y = Utils.MINIMUM_COORDINATE; y <= Utils.MAXIMUM_COORDINATE; y++) {
 				spaces[currentSpace] = new Space(x, y, color);
 				color = color.switchColor();
+				currentSpace++;
 			}
 			
 			// Need to switch colors again
@@ -29,6 +30,16 @@ public class Board {
 	//TODO:
 	public void initPieces() {
 		
+	}
+	
+	public Space getSpaceByCoords(int xCoord, int yCoord) {
+		for (Space space : spaces) {
+			if (space.getXCoord() == xCoord && space.getYCoord() == yCoord) {
+				return space;
+			}
+		}
+		
+		return null;
 	}
 	
 	public boolean isSpaceFree(int xCoord, int yCoord) {

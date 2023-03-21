@@ -25,6 +25,10 @@ public class Space {
 		this(xCoord, yCoord, null, null, color);
 	}
 	
+	public Space(int xCoord, int yCoord) {
+		this(xCoord, yCoord, null, null, null);
+	}
+	
 	public int getXCoord() {
 		return this.xCoord;
 	}
