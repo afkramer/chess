@@ -1,6 +1,8 @@
 package utility;
 
+import entities.Board;
 import entities.Space;
+import entities.pieces.Piece;
 
 public class Utils {
 	public static final int TOTAL_SPACES = 64;
@@ -56,11 +58,68 @@ public class Utils {
 	
 	//TODO: START HERE! How to determine whether a piece is in the path?
 	// It's OK to be naive ;)
-	public static boolean isPieceInDiagonalPath(Space currentSpace, Space targetSpace) {
+	// Is there a better way to access the board? 
+	public static boolean isPieceInDiagonalPath(Space currentSpace, Space targetSpace, Board board) {
+		while (currentSpace.getXCoord() != targetSpace.getXCoord() && currentSpace.getYCoord() != targetSpace.getYCoord()) {
+			currentSpace = moveOneSpaceDiagonal(currentSpace, targetSpace, board);
+			if (!currentSpace.getIsFree()) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	
-	public static boolean isPieceInHorizontalPath(Space currentSpace, Space targetSpace) {
+	public static boolean isPieceInHorizontalPath(Space currentSpace, Space targetSpace, Board board) {
+		while (currentSpace.getXCoord() != targetSpace.getXCoord() && currentSpace.getYCoord() != targetSpace.getYCoord()) {
+			currentSpace = moveOneSpaceHorizontal(currentSpace, targetSpace, board);
+			if (!currentSpace.getIsFree()) {
+				return true;
+			}
+		}
+		
 		return false;
+	}
+	
+	public static Space moveOneSpaceDiagonal(Space currentSpace, Space targetSpace, Board board) {
+		int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
+		int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
+		int shiftedXCoord = currentSpace.getXCoord();
+		int shiftedYCoord = currentSpace.getYCoord();
+		
+		if (totalXShift > 0) {
+			shiftedXCoord++;
+		} else {
+			shiftedXCoord--;
+		}
+		
+		if (totalYShift > 0) {
+			shiftedYCoord++;
+		} else {
+			shiftedYCoord--;
+		}
+		
+		return board.getSpaceByCoords(shiftedXCoord, shiftedYCoord);
+	}
+	
+	public static Space moveOneSpaceHorizontal(Space currentSpace, Space targetSpace, Board board) {
+		int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
+		int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
+		int shiftedXCoord = currentSpace.getXCoord();
+		int shiftedYCoord = currentSpace.getYCoord();
+		
+		if (totalXShift > 0) {
+			shiftedXCoord++;
+		} else if (totalXShift < 0) {
+			shiftedXCoord--;
+		}
+		
+		if (totalYShift > 0) {
+			shiftedYCoord++;
+		} else if (totalYShift < 0) {
+			shiftedYCoord--;
+		}
+		
+		return board.getSpaceByCoords(shiftedXCoord, shiftedYCoord);
 	}
 }
