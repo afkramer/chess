@@ -27,10 +27,18 @@ public class Board {
 		}
 	}
 
-	//TODO:
+	//TODO
 	public void initPieces() {
 		
 	}
+	
+	//TODO
+	public void initSpaces() {
+		for (Space space : spaces) {
+			// TODO: figure out how to reigster the linear and diagonal spaces per space
+		}
+	}
+	
 	
 	public Space getSpaceByCoords(int xCoord, int yCoord) {
 		for (Space space : spaces) {
@@ -42,12 +50,17 @@ public class Board {
 		return null;
 	}
 	
-	public boolean isSpaceFree(int xCoord, int yCoord) {
+	public boolean isSpaceFreeByCoords(int xCoord, int yCoord) {
 		for(Space space : spaces) {
 			if (space.getXCoord() == xCoord && space.getYCoord() == yCoord && space.getIsFree()) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public boolean isSpaceValidByCoords(int xCoord, int yCoord) {
+		return xCoord >= Utils.MINIMUM_COORDINATE && xCoord <= Utils.MAXIMUM_COORDINATE
+					&& yCoord >= Utils.MINIMUM_COORDINATE && yCoord <= Utils.MAXIMUM_COORDINATE;
 	}
 }

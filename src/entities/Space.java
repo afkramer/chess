@@ -53,6 +53,10 @@ public class Space {
 		this.linearAdjacents = linearAdjacents;
 	}
 	
+	public void addLinearAdjacent(Space space) {
+		this.linearAdjacents.add(space);
+	}
+	
 	public List<Space> getDiagonalAdjacents() {
 		return this.diagonalAdjacents;
 	}
@@ -61,6 +65,10 @@ public class Space {
 		this.diagonalAdjacents = diagonalAdjacents;
 	}
 
+	public void addDiagonalAdjacent(Space space) {
+		this.diagonalAdjacents.add(space);
+	}
+	
 	public Color getColor() {
 		return this.color;
 	}
