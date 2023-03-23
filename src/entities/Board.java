@@ -27,7 +27,7 @@ public class Board {
 		}
 	}
 
-	//TODO
+	//TODO when all the pieces are available
 	public void initPieces() {
 		
 	}
@@ -108,45 +108,57 @@ public class Board {
 	}
 	
 	public Space moveOneSpaceDiagonal(Space currentSpace, Space targetSpace) {
-		int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
-		int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
-		int shiftedXCoord = currentSpace.getXCoord();
-		int shiftedYCoord = currentSpace.getYCoord();
-		
-		if (totalXShift > 0) {
-			shiftedXCoord++;
+		if (Utils.areValidCoords(targetSpace.getXCoord(), targetSpace.getYCoord())) {
+			int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
+			int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
+			int shiftedXCoord = currentSpace.getXCoord();
+			int shiftedYCoord = currentSpace.getYCoord();
+			
+			if (totalXShift > 0) {
+				shiftedXCoord++;
+			} else {
+				shiftedXCoord--;
+			}
+			
+			if (totalYShift > 0) {
+				shiftedYCoord++;
+			} else {
+				shiftedYCoord--;
+			}
+			
+			return getSpaceByCoords(shiftedXCoord, shiftedYCoord);
+			
 		} else {
-			shiftedXCoord--;
+			return currentSpace;
 		}
 		
-		if (totalYShift > 0) {
-			shiftedYCoord++;
-		} else {
-			shiftedYCoord--;
-		}
-		
-		return getSpaceByCoords(shiftedXCoord, shiftedYCoord);
 	}
 	
 	public Space moveOneSpaceHorizontal(Space currentSpace, Space targetSpace) {
-		int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
-		int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
-		int shiftedXCoord = currentSpace.getXCoord();
-		int shiftedYCoord = currentSpace.getYCoord();
-		
-		if (totalXShift > 0) {
-			shiftedXCoord++;
-		} else if (totalXShift < 0) {
-			shiftedXCoord--;
+		if (Utils.areValidCoords(targetSpace.getXCoord(), targetSpace.getYCoord())) {
+			int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
+			int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
+			int shiftedXCoord = currentSpace.getXCoord();
+			int shiftedYCoord = currentSpace.getYCoord();
+			
+			if (totalXShift > 0) {
+				shiftedXCoord++;
+			} else if (totalXShift < 0) {
+				shiftedXCoord--;
+			}
+			
+			if (totalYShift > 0) {
+				shiftedYCoord++;
+			} else if (totalYShift < 0) {
+				shiftedYCoord--;
+			}
+			
+			return getSpaceByCoords(shiftedXCoord, shiftedYCoord);
+			
+		} else {
+			return currentSpace;
 		}
 		
-		if (totalYShift > 0) {
-			shiftedYCoord++;
-		} else if (totalYShift < 0) {
-			shiftedYCoord--;
-		}
-		
-		return getSpaceByCoords(shiftedXCoord, shiftedYCoord);
 	}
 
 }
