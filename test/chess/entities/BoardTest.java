@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import entities.Board;
 import entities.Space;
-import utility.Utils;
 
 public class BoardTest {
 	

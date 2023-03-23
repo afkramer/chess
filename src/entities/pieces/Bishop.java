@@ -12,14 +12,16 @@ public class Bishop extends Piece {
 	}
 	
 	public void move(Space targetSpace) {
-		
+		this.getSpace().setIsFree(true);
+		this.setSpace(targetSpace);
+		targetSpace.setIsFree(false);
 	}
 	
 	public boolean isMoveValid(Space targetSpace) {
 		boolean isValid = false;
 		if (Utils.isDiagonalMove(this.getSpace(), targetSpace)) {
 			// only if the move is diagonal, check if there are pieces in the path
-			if (this.getBoard().isPieceInDiagonalPath(targetSpace, targetSpace)) {
+			if (!this.getBoard().isPieceInDiagonalPath(this.getSpace(), targetSpace)) {
 				isValid = true;
 			} 
 		}

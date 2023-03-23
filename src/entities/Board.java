@@ -32,10 +32,36 @@ public class Board {
 		
 	}
 	
-	//TODO
 	public void initSpaces() {
 		for (Space space : spaces) {
-			// TODO: figure out how to reigster the linear and diagonal spaces per space
+			setDiagonalAdjacents(space);
+			setLinearAdjacents(space);
+		}
+	}
+	
+	// Refactor possibility: Both of the following methods use the same code!
+	//TODO: TEST
+	public void setDiagonalAdjacents(Space space) {
+		int[][] possibleDiagonalAdjacents = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
+		for (int[] adjacents : possibleDiagonalAdjacents) {
+			int xCoord = adjacents[0];
+			int yCoord = adjacents[1];
+			
+			if (Utils.areValidCoords(xCoord, yCoord)) {
+				space.addDiagonalAdjacent(getSpaceByCoords(xCoord, yCoord));
+			}
+		}
+	}
+	
+	public void setLinearAdjacents(Space space) {
+		int[][] possibleLinearAdjacents = {{0, -1}, {1, 0}, {0, 1}, {-1,0}};
+		for (int[] adjacents : possibleLinearAdjacents) {
+			int xCoord = adjacents[0];
+			int yCoord = adjacents[1];
+			
+			if (Utils.areValidCoords(xCoord, yCoord)) {
+				space.addLinearAdjacent(getSpaceByCoords(xCoord, yCoord));
+			}
 		}
 	}
 	
