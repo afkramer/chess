@@ -58,9 +58,5 @@ public class Board {
 		}
 		return false;
 	}
-	
-	public boolean isSpaceValidByCoords(int xCoord, int yCoord) {
-		return xCoord >= Utils.MINIMUM_COORDINATE && xCoord <= Utils.MAXIMUM_COORDINATE
-					&& yCoord >= Utils.MINIMUM_COORDINATE && yCoord <= Utils.MAXIMUM_COORDINATE;
-	}
+
 }

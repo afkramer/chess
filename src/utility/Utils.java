@@ -56,6 +56,11 @@ public class Utils {
 		return xIsSame && yIsSame;
 	}
 	
+	public static boolean areValidCoords(int xCoord, int yCoord) {
+		return xCoord >= Utils.MINIMUM_COORDINATE && xCoord <= Utils.MAXIMUM_COORDINATE
+				&& yCoord >= Utils.MINIMUM_COORDINATE && yCoord <= Utils.MAXIMUM_COORDINATE;
+	}
+	
 	//TODO: START HERE! How to determine whether a piece is in the path?
 	// It's OK to be naive ;)
 	// Is there a better way to access the board? 
