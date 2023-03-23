@@ -58,5 +58,69 @@ public class Board {
 		}
 		return false;
 	}
+	
+	public boolean isPieceInDiagonalPath(Space currentSpace, Space targetSpace) {
+		while (currentSpace.getXCoord() != targetSpace.getXCoord() && currentSpace.getYCoord() != targetSpace.getYCoord()) {
+			currentSpace = moveOneSpaceDiagonal(currentSpace, targetSpace);
+			if (!currentSpace.getIsFree()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean isPieceInHorizontalPath(Space currentSpace, Space targetSpace) {
+		while (currentSpace.getXCoord() != targetSpace.getXCoord() && currentSpace.getYCoord() != targetSpace.getYCoord()) {
+			currentSpace = moveOneSpaceHorizontal(currentSpace, targetSpace);
+			if (!currentSpace.getIsFree()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public Space moveOneSpaceDiagonal(Space currentSpace, Space targetSpace) {
+		int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
+		int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
+		int shiftedXCoord = currentSpace.getXCoord();
+		int shiftedYCoord = currentSpace.getYCoord();
+		
+		if (totalXShift > 0) {
+			shiftedXCoord++;
+		} else {
+			shiftedXCoord--;
+		}
+		
+		if (totalYShift > 0) {
+			shiftedYCoord++;
+		} else {
+			shiftedYCoord--;
+		}
+		
+		return getSpaceByCoords(shiftedXCoord, shiftedYCoord);
+	}
+	
+	public Space moveOneSpaceHorizontal(Space currentSpace, Space targetSpace) {
+		int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
+		int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();
+		int shiftedXCoord = currentSpace.getXCoord();
+		int shiftedYCoord = currentSpace.getYCoord();
+		
+		if (totalXShift > 0) {
+			shiftedXCoord++;
+		} else if (totalXShift < 0) {
+			shiftedXCoord--;
+		}
+		
+		if (totalYShift > 0) {
+			shiftedYCoord++;
+		} else if (totalYShift < 0) {
+			shiftedYCoord--;
+		}
+		
+		return getSpaceByCoords(shiftedXCoord, shiftedYCoord);
+	}
 
 }
