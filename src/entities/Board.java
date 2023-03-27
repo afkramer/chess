@@ -11,6 +11,10 @@ public class Board {
 		this.initPieces();
 	}
 	
+	public Space[] getSpaces() {
+		return this.spaces;
+	}
+	
 	public void initBoard() {
 		Color color = Color.BLACK;
 		int currentSpace = 0;
