@@ -3,12 +3,14 @@ package entities.pieces;
 import entities.Board;
 import entities.Space;
 import entities.enums.Color;
+import entities.enums.PieceType;
 
 
 public abstract class Piece {
 	private Board board;
 	private Space currentSpace;
 	private Color color;
+	private PieceType pieceType;
 
 	public Piece(Space currentSpace, Color color, Board board) {
 		this.board = board;
@@ -38,5 +40,9 @@ public abstract class Piece {
 	
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	public PieceType getPieceType() {
+		return this.pieceType;
 	}
 }
