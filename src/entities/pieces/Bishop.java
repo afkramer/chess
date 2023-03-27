@@ -3,12 +3,18 @@ package entities.pieces;
 import entities.Board;
 import entities.Space;
 import entities.enums.Color;
+import entities.enums.PieceType;
 import utility.Utils;
 
 public class Bishop extends Piece {
 	
 	public Bishop(Space currentSpace, Color color, Board board) {
 		super(currentSpace, color, board);
+		if (color == Color.WHITE) {
+			this.setPieceType(PieceType.WHITE_BISHOP);
+		} else {
+			this.setPieceType(PieceType.BLACK_BISHOP);
+		}
 	}
 	
 	public void move(Space targetSpace) {

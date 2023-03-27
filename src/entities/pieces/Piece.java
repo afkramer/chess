@@ -45,4 +45,8 @@ public abstract class Piece {
 	public PieceType getPieceType() {
 		return this.pieceType;
 	}
+	
+	public void setPieceType(PieceType pieceType) {
+		this.pieceType = pieceType;
+	}
 }
