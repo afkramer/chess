@@ -2,7 +2,7 @@ package entities;
 
 import java.util.List;
 
-import entities.enums.Color;
+import entities.enums.SpaceColor;
 import entities.pieces.Piece;
 
 public class Space {
@@ -10,11 +10,11 @@ public class Space {
 	private int yCoord;
 	private List<Space> linearAdjacents;
 	private List<Space> diagonalAdjacents;
-	private Color color;
+	private SpaceColor color;
 	private boolean isFree;
 	private Piece piece;
 	
-	public Space(int xCoord, int yCoord, List<Space> linearAdjacents, List<Space> diagonalAdjacents, Color color) {
+	public Space(int xCoord, int yCoord, List<Space> linearAdjacents, List<Space> diagonalAdjacents, SpaceColor color) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.linearAdjacents = linearAdjacents;
@@ -24,7 +24,7 @@ public class Space {
 		this.piece = null;
 	}
 	
-	public Space(int xCoord, int yCoord, Color color) {
+	public Space(int xCoord, int yCoord, SpaceColor color) {
 		this(xCoord, yCoord, null, null, color);
 	}
 	
@@ -72,11 +72,11 @@ public class Space {
 		this.diagonalAdjacents.add(space);
 	}
 	
-	public Color getColor() {
+	public SpaceColor getColor() {
 		return this.color;
 	}
 	
-	public void setColor(Color color) {
+	public void setColor(SpaceColor color) {
 		this.color = color;
 	}
 

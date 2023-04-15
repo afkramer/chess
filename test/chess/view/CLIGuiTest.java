@@ -3,14 +3,14 @@ package chess.view;
 import org.junit.jupiter.api.Test;
 
 import entities.Board;
-import entities.enums.Color;
+import entities.enums.SpaceColor;
 import entities.pieces.Bishop;
 import view.CLIGui;
 
 public class CLIGuiTest {
 	
 	private Board board = new Board();
-	private Bishop bishop = new Bishop(board.getSpaceByCoords(0, 2), Color.BLACK, board);
+	private Bishop bishop = new Bishop(board.getSpaceByCoords(0, 2), SpaceColor.BLACK, board);
 	
 	@Test
 	public void printBoardTest() {

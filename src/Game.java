@@ -9,8 +9,8 @@ public class Game {
 	private Player player2;
 	
 	public Game() {
-		gui = new Gui();
 		board = new Board();
+		gui = new Gui(board);
 	}
 	
 	public void startGame() {

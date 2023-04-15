@@ -1,6 +1,6 @@
 package entities;
 
-import entities.enums.Color;
+import entities.enums.SpaceColor;
 import entities.pieces.Bishop;
 import entities.pieces.Pawn;
 import entities.pieces.Piece;
@@ -20,7 +20,7 @@ public class Board {
 	}
 	
 	public void initBoard() {
-		Color color = Color.BLACK;
+		SpaceColor color = SpaceColor.BLACK;
 		int currentSpace = 0;
 		for (int x = Utils.MINIMUM_COORDINATE; x <= Utils.MAXIMUM_COORDINATE; x++) {
 			for (int y = Utils.MINIMUM_COORDINATE; y <= Utils.MAXIMUM_COORDINATE; y++) {
@@ -46,13 +46,13 @@ public class Board {
 			for (int y = 0; y <= Utils.MAXIMUM_COORDINATE; y++) {
 				space = this.getSpaceByCoords(x, y);
 				if (x == 1) {
-					piece = new Pawn(space, Color.BLACK, this);
+					piece = new Pawn(space, SpaceColor.BLACK, this);
 				} else if (x == 6) {
-					piece = new Pawn(space, Color.WHITE, this);
+					piece = new Pawn(space, SpaceColor.WHITE, this);
 				} else if ((y == 2 || y == 5) && x == 0) {
-					piece = new Bishop(space, Color.BLACK, this);
+					piece = new Bishop(space, SpaceColor.BLACK, this);
 				} else if ((y == 2 || y == 5) && x == 7) {
-					piece = new Bishop(space, Color.WHITE, this);
+					piece = new Bishop(space, SpaceColor.WHITE, this);
 				} else {
 					piece = null;
 				}

@@ -2,7 +2,7 @@ package view;
 
 import entities.Board;
 import entities.Space;
-import entities.enums.Color;
+import entities.enums.SpaceColor;
 import utility.Utils;
 
 public class CLIGui {
@@ -23,7 +23,7 @@ public class CLIGui {
 		StringBuilder sb = new StringBuilder();
 		for (Space space : board.getSpaces()) {
 			
-			if (space.getColor().equals(Color.BLACK)) {
+			if (space.getColor().equals(SpaceColor.BLACK)) {
 				sb.append(BACKGROUND_PURPLE);
 			} else {
 				sb.append(BACKGROUND_CREAM);

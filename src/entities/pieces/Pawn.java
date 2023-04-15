@@ -2,14 +2,14 @@ package entities.pieces;
 
 import entities.Board;
 import entities.Space;
-import entities.enums.Color;
+import entities.enums.SpaceColor;
 import entities.enums.PieceType;
 
 public class Pawn extends Piece {
 	
-	public Pawn(Space currentSpace, Color color, Board board) {
+	public Pawn(Space currentSpace, SpaceColor color, Board board) {
 		super(currentSpace, color, board);
-		if (color == Color.WHITE) {
+		if (color == SpaceColor.WHITE) {
 			this.setPieceType(PieceType.WHITE_PAWN);
 		} else {
 			this.setPieceType(PieceType.BLACK_PAWN);

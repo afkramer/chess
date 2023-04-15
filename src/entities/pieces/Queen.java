@@ -2,11 +2,11 @@ package entities.pieces;
 
 import entities.Board;
 import entities.Space;
-import entities.enums.Color;
+import entities.enums.SpaceColor;
 
 public class Queen extends Piece {
 	
-	public Queen(Space space, Color color, Board board) {
+	public Queen(Space space, SpaceColor color, Board board) {
 		super(space, color, board);
 	}
 	
