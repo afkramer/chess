@@ -1,6 +1,9 @@
 package entities;
 
 import entities.enums.Color;
+import entities.pieces.Bishop;
+import entities.pieces.Pawn;
+import entities.pieces.Piece;
 import utility.Utils;
 
 public class Board {
@@ -33,8 +36,28 @@ public class Board {
 	}
 
 	//TODO when all the pieces are available
+	//TODO: I hard code a lot of the coordinates for where pieces should be
+	// Is there a better way to set up the pieces?
+	// This method also got pretty long
 	public void initPieces() {
-		
+		Piece piece = null;
+		Space space;
+		for (int x = 0; x <= Utils.MAXIMUM_COORDINATE; x++) {
+			for (int y = 0; y <= Utils.MAXIMUM_COORDINATE; y++) {
+				space = this.getSpaceByCoords(x, y);
+				if (x == 1) {
+					piece = new Pawn(space, Color.BLACK, this);
+				} else if (x == 6) {
+					piece = new Pawn(space, Color.WHITE, this);
+				} else if ((y == 2 || y == 5) && x == 0) {
+					piece = new Bishop(space, Color.BLACK, this);
+				} else if ((y == 2 || y == 5) && x == 7) {
+					piece = new Bishop(space, Color.WHITE, this);
+				}
+				
+				space.setPiece(piece);
+			}
+		}
 	}
 	
 	public void initSpaces() {

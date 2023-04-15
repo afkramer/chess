@@ -3,6 +3,7 @@ package view;
 import entities.Board;
 import entities.Space;
 import entities.enums.Color;
+import utility.Utils;
 
 public class Gui {
 	private static final String EMPTY_SPACE = " ";
@@ -34,9 +35,9 @@ public class Gui {
 				sb.append(space.getPiece().getPieceType().getPieceString());
 			}
 			
-			if (counter == 7) {
+			if (counter == Utils.MAXIMUM_COORDINATE) {
 				sb.append("\n");
-				counter = 0;
+				counter = Utils.MINIMUM_COORDINATE;
 			} else {
 				counter++;
 			}
