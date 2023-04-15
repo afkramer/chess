@@ -6,6 +6,7 @@ import utility.Utils;
 public class Board {
 	private Space[] spaces = new Space[Utils.TOTAL_SPACES];
 	
+	
 	public Board() {
 		this.initBoard();
 		this.initPieces();

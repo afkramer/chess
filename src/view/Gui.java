@@ -2,6 +2,7 @@ package view;
 
 import entities.Board;
 import entities.Space;
+import entities.enums.Color;
 
 public class Gui {
 	private static final String EMPTY_SPACE = " ";
@@ -20,11 +21,31 @@ public class Gui {
 		int counter = 0;
 		StringBuilder sb = new StringBuilder();
 		for (Space space : board.getSpaces()) {
+			
+			if (space.getColor().equals(Color.BLACK)) {
+				sb.append(BACKGROUND_PURPLE);
+			} else {
+				sb.append(BACKGROUND_CREAM);
+			}
+			
 			if (space.getIsFree()) {
-				sp
-				sb.append(EMPTY_SPACE)
+				sb.append(EMPTY_SPACE);
+			} else {
+				sb.append(space.getPiece().getPieceType().getPieceString());
+			}
+			
+			if (counter == 7) {
+				sb.append("\n");
+				counter = 0;
+			} else {
+				counter++;
 			}
 		}
+		
+		System.out.println(sb);
 	}
 
+	public static String setSpaceColor() {
+		return "";
+	}
 }

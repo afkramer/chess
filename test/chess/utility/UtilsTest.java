@@ -1,4 +1,4 @@
-package utility;
+package chess.utility;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import entities.Board;
 import entities.Space;
+import utility.Utils;
 
 public class UtilsTest {
 	

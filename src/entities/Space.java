@@ -3,6 +3,7 @@ package entities;
 import java.util.List;
 
 import entities.enums.Color;
+import entities.pieces.Piece;
 
 public class Space {
 	private int xCoord;
@@ -11,6 +12,7 @@ public class Space {
 	private List<Space> diagonalAdjacents;
 	private Color color;
 	private boolean isFree;
+	private Piece piece;
 	
 	public Space(int xCoord, int yCoord, List<Space> linearAdjacents, List<Space> diagonalAdjacents, Color color) {
 		this.xCoord = xCoord;
@@ -19,6 +21,7 @@ public class Space {
 		this.diagonalAdjacents = diagonalAdjacents;
 		this.color = color;
 		this.isFree = true;
+		this.piece = null;
 	}
 	
 	public Space(int xCoord, int yCoord, Color color) {
@@ -83,5 +86,13 @@ public class Space {
 	
 	public void setIsFree(boolean isFree) {
 		this.isFree = isFree;
+	}
+	
+	public Piece getPiece() {
+		return this.piece;
+	}
+	
+	public void setPiece(Piece piece) {
+		this.piece = piece;
 	}
 }
