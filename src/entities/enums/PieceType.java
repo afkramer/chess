@@ -1,5 +1,6 @@
 package entities.enums;
 
+//TODO: piece type NONE is not used
 public enum PieceType {
 	WHITE_KING("\u2654"),
 	WHITE_QUEEN("\u2655"),

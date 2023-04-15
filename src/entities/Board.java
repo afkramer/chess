@@ -53,9 +53,14 @@ public class Board {
 					piece = new Bishop(space, Color.BLACK, this);
 				} else if ((y == 2 || y == 5) && x == 7) {
 					piece = new Bishop(space, Color.WHITE, this);
+				} else {
+					piece = null;
 				}
 				
-				space.setPiece(piece);
+				if (piece != null) {
+					space.setPiece(piece);
+					space.setIsFree(false);
+				}
 			}
 		}
 	}

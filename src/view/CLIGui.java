@@ -5,14 +5,14 @@ import entities.Space;
 import entities.enums.Color;
 import utility.Utils;
 
-public class Gui {
+public class CLIGui {
 	private static final String EMPTY_SPACE = " ";
 	
 	private static final String BACKGROUND_CREAM = "\u001B[48;5;230m";
 	private static final String BACKGROUND_PURPLE = "\u001B[48;5;90m";
 	private static final String ANSCI_RESET = "\u001B[0m";
 	
-	private Gui() {}
+	private CLIGui() {}
 	
 	public static void testColors() {
 		System.out.println(BACKGROUND_CREAM + "    " + BACKGROUND_PURPLE + "    " + ANSCI_RESET);

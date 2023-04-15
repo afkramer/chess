@@ -1,7 +1,7 @@
-import view.Gui;
+import view.CLIGui;
 
 public class Main {
 	public static void main(String[] args) {
-		Gui.testColors();
+		CLIGui.testColors();
 	}
 }
