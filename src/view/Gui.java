@@ -20,7 +20,7 @@ import entities.Space;
 import utility.Utils;
 
 
-public class Gui implements MouseListener {
+public class Gui implements MouseListener, ActionListener {
 	private JFrame frame;
 	private JPanel spacesPanel;
 	private Font f = new Font("serif", Font.PLAIN, 36);
@@ -49,9 +49,15 @@ public class Gui implements MouseListener {
 		
 		String[] columnLabels = {" ", "A", "B", "C", "D", "E", "F", "G", "H"};
 		for (String label : columnLabels) {
+			/*
 			JLabel guiSpace = new JLabel(label, JLabel.CENTER);
 			guiSpace.setFont(f);
 			spacesPanel.add(guiSpace);
+			*/
+			JButton guiButton = new JButton(label);
+			guiButton.setFont(f);
+			guiButton.addActionListener(this);
+			spacesPanel.add(guiButton);
 		}
 		
 		//TODO: a lot of repeated code because text alignment wasn't working correctly if text was added after object instantiation
@@ -122,5 +128,9 @@ public class Gui implements MouseListener {
 	
 	public void updateBoard() {
 		
+	}
+	
+	public void actionPerformed(ActionEvent event) {
+		System.out.println(event.getSource());
 	}
 }
