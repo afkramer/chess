@@ -19,8 +19,9 @@ import entities.Board;
 import entities.Space;
 import utility.Utils;
 
+//TODO: the way things stand, all the labels are kind of bunched up.. I'm not sure how the spacing is working or why they aren't visible
 
-public class Gui implements MouseListener, ActionListener {
+public class Gui implements MouseListener {
 	private JFrame frame;
 	private JPanel spacesPanel;
 	private Font f = new Font("serif", Font.PLAIN, 36);
@@ -49,45 +50,53 @@ public class Gui implements MouseListener, ActionListener {
 		
 		String[] columnLabels = {" ", "A", "B", "C", "D", "E", "F", "G", "H"};
 		for (String label : columnLabels) {
-			/*
+			
 			JLabel guiSpace = new JLabel(label, JLabel.CENTER);
 			guiSpace.setFont(f);
 			spacesPanel.add(guiSpace);
-			*/
-			JButton guiButton = new JButton(label);
-			guiButton.setFont(f);
-			guiButton.addActionListener(this);
-			spacesPanel.add(guiButton);
+			
 		}
 		
 		//TODO: a lot of repeated code because text alignment wasn't working correctly if text was added after object instantiation
 		//TODO: how to determine where the user clicked to be able to then move their desired piece?
 		for (int x = 0; x <= Utils.MAXIMUM_COORDINATE; x++) {
 			for (int y = 0; y <= Utils.MAXIMUM_COORDINATE + 1; y++) {
-				boardSpace = board.getSpaceByCoords(x, y - 1);
+				MyJLabel guiSpace = new MyJLabel();
+				guiSpace.setFont(f);
+				
 				
 				if (y == 0) {
-					JLabel guiSpace = new JLabel("" + x, JLabel.CENTER);
-					guiSpace.setFont(f);
-					spacesPanel.add(guiSpace);
+					//JLabel guiSpace = new JLabel("" + x, JLabel.CENTER);
+					//guiSpace.setFont(f);
+					guiSpace.setText("" + x);
+					//spacesPanel.add(guiSpace);
+					
 				} else {
+					boardSpace = board.getSpaceByCoords(x, y - 1);
+					guiSpace.setBackground(boardSpace.getColor().getColor());
+					guiSpace.addMouseListener(this);
+					guiSpace.setX(x);
+					guiSpace.setY(y);
+					
 					if (boardSpace.getPiece() == null) {
-						JLabel guiSpace = new JLabel();
-						guiSpace.setBackground(boardSpace.getColor().getColor());
-						guiSpace.setOpaque(true);
-						guiSpace.setFont(f);
-						guiSpace.addMouseListener(this);
-						spacesPanel.add(guiSpace);
+						//JLabel guiSpace = new JLabel();
+						//guiSpace.setBackground(boardSpace.getColor().getColor());
+						//guiSpace.setOpaque(true);
+						//guiSpace.setFont(f);
+						//guiSpace.addMouseListener(this);
+						//spacesPanel.add(guiSpace);
 						
 					} else {
 						String pieceString = boardSpace.getPiece().getPieceType().getPieceString();
-						JLabel guiSpace = new JLabel(pieceString, JLabel.CENTER);
-						guiSpace.setBackground(boardSpace.getColor().getColor());
-						guiSpace.setOpaque(true);
-						guiSpace.setFont(f);
-						guiSpace.addMouseListener(this);
-						spacesPanel.add(guiSpace);
+						guiSpace.setText(pieceString);
+						//JLabel guiSpace = new JLabel(pieceString, JLabel.CENTER);
+						//guiSpace.setBackground(boardSpace.getColor().getColor());
+						//guiSpace.setOpaque(true);
+						//guiSpace.setFont(f);
+						//guiSpace.addMouseListener(this);
+						//spacesPanel.add(guiSpace);
 					}
+					spacesPanel.add(guiSpace);
 					
 				}
 				
@@ -118,6 +127,7 @@ public class Gui implements MouseListener, ActionListener {
 	
 	public void mouseClicked(MouseEvent event) {
 		System.out.println(event.getSource());
+		System.out.println(event.getComponent().toString());
 	}
 	
 	public void mouseReleased(MouseEvent event) {
@@ -128,9 +138,5 @@ public class Gui implements MouseListener, ActionListener {
 	
 	public void updateBoard() {
 		
-	}
-	
-	public void actionPerformed(ActionEvent event) {
-		System.out.println(event.getSource());
 	}
 }
