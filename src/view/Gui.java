@@ -35,8 +35,8 @@ public class Gui implements MouseListener {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(720, 720);
-		//drawEmptyBoardDoesWorkButIsNotCool();
-		testMyJLabel();
+		drawBoard();
+		//testMyJLabel();
 		frame.setVisible(true);
 	}
 	
@@ -71,7 +71,7 @@ public class Gui implements MouseListener {
 		frame.getContentPane().add(BorderLayout.CENTER, spacesPanel);
 	}
 	
-	public void drawEmptyBoardDoesNotWork() {
+	public void drawBoard() {
 		spacesPanel = new JPanel();
 		spacesPanel.setLayout(new GridLayout(9, 9));
 		
@@ -80,7 +80,7 @@ public class Gui implements MouseListener {
 		String[] columnLabels = {" ", "A", "B", "C", "D", "E", "F", "G", "H"};
 		for (String label : columnLabels) {
 			
-			JLabel guiSpace = new JLabel(label, JLabel.CENTER);
+			MyJLabel guiSpace = new MyJLabel(label);
 			guiSpace.setFont(f);
 			spacesPanel.add(guiSpace);
 			
@@ -93,28 +93,24 @@ public class Gui implements MouseListener {
 				
 				// It is a label for each row
 				if (y == 0) {
-					guiSpace.setText("" + x);
+					guiSpace.setText("" + (x + 1));
 				
 				// it is a space and needs the correct color and/or piece
 				} else {
 					boardSpace = board.getSpaceByCoords(x, y - 1);
 					guiSpace.setBackground(boardSpace.getColor().getColor());
 					guiSpace.addMouseListener(this);
-					//guiSpace.setX(x);
-					//guiSpace.setY(y);
+					guiSpace.setxCoord(x);
+					guiSpace.setyCoord(y - 1);
 					
 					if (boardSpace.getPiece() != null) {
 						String pieceString = boardSpace.getPiece().getPieceType().getPieceString();
 						guiSpace.setText(pieceString);
 					} 
-					
-					spacesPanel.add(guiSpace);
-					
 				}
-				
+				spacesPanel.add(guiSpace);
 			}
 		}
-		
 		frame.getContentPane().add(BorderLayout.CENTER, spacesPanel);
 	}
 	

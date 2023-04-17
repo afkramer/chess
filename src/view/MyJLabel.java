@@ -6,8 +6,8 @@ import javax.swing.border.Border;
 public class MyJLabel extends JLabel {
 
 	private static final long serialVersionUID = 3962219754901511244L;
-	private final int xCoord;
-	private final int yCoord;
+	private int xCoord;
+	private int yCoord;
 	
 	public MyJLabel(String labelText, int textPosition, int boardXCoordinate, int boardYCoordinate) {
 		super(labelText, textPosition);
@@ -34,6 +34,22 @@ public class MyJLabel extends JLabel {
 	
 	public MyJLabel() {
 		this("", JLabel.CENTER, 0, 0);
+	}
+
+	public int getxCoord() {
+		return xCoord;
+	}
+
+	public void setxCoord(int xCoord) {
+		this.xCoord = xCoord;
+	}
+
+	public int getyCoord() {
+		return yCoord;
+	}
+
+	public void setyCoord(int yCoord) {
+		this.yCoord = yCoord;
 	}
 
 	public String toString() {
