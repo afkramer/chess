@@ -11,9 +11,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.junit.platform.commons.logging.Logger;
-import org.junit.platform.commons.logging.LoggerFactory;
-
 import entities.Board;
 import entities.Player;
 import entities.Space;
@@ -25,7 +22,6 @@ public class Gui implements MouseListener {
 	private Font f = new Font("serif", Font.PLAIN, 36);
 	private Board board;
 	private Player currentPlayer;
-	private final Logger LOGGER = LoggerFactory.getLogger(Gui.class);
 	
 	public Gui(Board board, Player currentPlayer) {
 		this.board = board;
