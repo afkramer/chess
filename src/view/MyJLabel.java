@@ -8,6 +8,7 @@ public class MyJLabel extends JLabel {
 	private static final long serialVersionUID = 3962219754901511244L;
 	private int xCoord;
 	private int yCoord;
+	private boolean isSelected;
 	
 	public MyJLabel(String labelText, int textPosition, int boardXCoordinate, int boardYCoordinate) {
 		super(labelText, textPosition);
@@ -50,6 +51,14 @@ public class MyJLabel extends JLabel {
 
 	public void setyCoord(int yCoord) {
 		this.yCoord = yCoord;
+	}
+	
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
 	}
 
 	public String toString() {

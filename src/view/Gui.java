@@ -1,15 +1,21 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.junit.platform.commons.logging.Logger;
+import org.junit.platform.commons.logging.LoggerFactory;
+
 import entities.Board;
+import entities.Player;
 import entities.Space;
 import utility.Utils;
 
@@ -18,12 +24,20 @@ public class Gui implements MouseListener {
 	private JPanel spacesPanel;
 	private Font f = new Font("serif", Font.PLAIN, 36);
 	private Board board;
+	private Player currentPlayer;
+	private final Logger LOGGER = LoggerFactory.getLogger(Gui.class);
 	
-	public Gui(Board board) {
+	public Gui(Board board, Player currentPlayer) {
 		this.board = board;
+		this.currentPlayer = currentPlayer;
 		this.initializeGui();
 	}
 	
+	public void setCurrentPlayer(Player player) {
+		this.currentPlayer = player;
+	}
+	
+	//TODO: make sure that the board stays square when the screen is resized
 	public void initializeGui() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +88,20 @@ public class Gui implements MouseListener {
 		}
 		frame.getContentPane().add(BorderLayout.CENTER, spacesPanel);
 	}
+	
+	public void processPieceToMove(MyJLabel label) {
+		Space chosenSpace = board.getSpaceByCoords(label.getX(), label.getY());
+		if (!chosenSpace.getIsFree()) {
+			if (chosenSpace.getPiece().getColor() == this.currentPlayer.getColor()) {
+				highlightSpace(label);
+			}
+		}
+	}
+	
+	public void highlightSpace(MyJLabel label) {
+		label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		label.setSelected(true);
+	}
 
 	
 	public void mouseEntered(MouseEvent event) {
@@ -94,8 +122,8 @@ public class Gui implements MouseListener {
 					// If it is valid, move the piece
 					// If it is not valid, flash red that the move is not allowed and/or display a message
 		System.out.println(event.getSource());
-		System.out.println(event.getComponent().toString());
-	
+		MyJLabel label = (MyJLabel) event.getSource();
+		label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 	}
 	
 	public void mouseReleased(MouseEvent event) {

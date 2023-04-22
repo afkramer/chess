@@ -2,6 +2,7 @@ package entities.enums;
 
 import java.awt.Color;
 
+//TODO: player and piece also needs a color, not just space. Does it make sense to rename the class?
 public enum SpaceColor {
 	WHITE(255, 247, 230),
 	BLACK(136, 0, 204);
