@@ -1,5 +1,8 @@
 package entities;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import entities.enums.SpaceColor;
 import entities.pieces.Bishop;
 import entities.pieces.Pawn;
@@ -8,6 +11,7 @@ import utility.Utils;
 
 public class Board {
 	private Space[] spaces = new Space[Utils.TOTAL_SPACES];
+	private final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 	
 	
 	public Board() {

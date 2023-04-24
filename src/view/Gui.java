@@ -20,13 +20,13 @@ import entities.Space;
 import utility.Utils;
 
 public class Gui implements MouseListener {
-	// Change to slf4j so that I practice that one. See Baeldung article
 	private final Logger LOGGER = LoggerFactory.getLogger(Gui.class);
 	private JFrame frame;
 	private JPanel spacesPanel;
 	private Font f = new Font("serif", Font.PLAIN, 36);
 	private Board board;
 	private Player currentPlayer;
+	private MyJLabel originGuiSpace;
 	
 	public Gui(Board board, Player currentPlayer) {
 		this.board = board;
@@ -90,18 +90,49 @@ public class Gui implements MouseListener {
 		frame.getContentPane().add(BorderLayout.CENTER, spacesPanel);
 	}
 	
-	public void processPieceToMove(MyJLabel label) {
-		Space chosenSpace = board.getSpaceByCoords(label.getX(), label.getY());
-		if (!chosenSpace.getIsFree()) {
-			if (chosenSpace.getPiece().getColor() == this.currentPlayer.getColor()) {
-				highlightSpace(label);
-			}
+	// TODO: this method should pass on the x and y coordinates
+	// First validate whether a piece has been chosen of the color of the current player
+		// If no piece has been selected, wait for a piece to be selected
+		// If the wrong color piece has been selected, do nothing and wait for the proper piece to be selected
+		// If the correct color piece has been selected, set the border so that the player knows it has been selected
+		// If the player selects the space again, they are still the current player
+		// Wait for them to select the next piece they want to move
+		// Otherwise, if they select a free space, validate that it is a valid move
+			// If it is valid, move the piece
+			// If it is not valid, flash red that the move is not allowed and/or display a message
+	
+	public void processPieceToMove(MyJLabel guiSpace) {
+		Space chosenSpace = board.getSpaceByCoords(guiSpace.getxCoord(), guiSpace.getyCoord());
+		
+		if (!chosenSpace.getIsFree() && this.originGuiSpace == null 
+				&& chosenSpace.getPiece().getColor() == this.currentPlayer.getColor()) {
+			LOGGER.debug(String.format("Selecting Gui space: %s", guiSpace.toString()));
+			selectOriginGuiSpace(guiSpace);	
+		} else if (this.originGuiSpace == guiSpace) {
+			LOGGER.debug(String.format("Unselecting Gui space: %s", guiSpace.toString()));
+			unselectOriginGuiSpace(guiSpace);
+		} else if (this.originGuiSpace != null && chosenSpace.getIsFree()) {
+			LOGGER.debug(String.format("Passing on to process a move: %s", guiSpace.toString()));
+			processMove(guiSpace);
 		}
 	}
 	
-	public void highlightSpace(MyJLabel label) {
-		label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-		label.setSelected(true);
+	public void selectOriginGuiSpace(MyJLabel guiSpace) {
+		guiSpace.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		guiSpace.setSelected(true);
+		this.originGuiSpace = guiSpace;
+	}
+	
+	public void unselectOriginGuiSpace(MyJLabel guiSpace) {
+		guiSpace.setBorder(BorderFactory.createEmptyBorder());
+		guiSpace.setSelected(false);
+		this.originGuiSpace = null;
+	}
+	
+	public void processMove(MyJLabel destinationGuiSpace) {
+		LOGGER.debug(String.format("Player wants to move from: %d, %d to %d %d", 
+				this.originGuiSpace.getxCoord(), this.originGuiSpace.getyCoord(), 
+				destinationGuiSpace.getxCoord(), destinationGuiSpace.getyCoord()));
 	}
 
 	
@@ -112,19 +143,9 @@ public class Gui implements MouseListener {
 	}
 	
 	public void mouseClicked(MouseEvent event) {
-		// TODO: this method should pass on the x and y coordinates
-			// First validate whether a piece has been chosen of the color of the current player
-				// If no piece has been selected, wait for a piece to be selected
-				// If the wrong color piece has been selected, do nothing and wait for the proper piece to be selected
-				// If the correct color piece has been selected, set the border so that the player knows it has been selected
-				// If the player selects the space again, they are still the current player
-				// Wait for them to select the next piece they want to move
-				// Otherwise, if they select a free space, validate that it is a valid move
-					// If it is valid, move the piece
-					// If it is not valid, flash red that the move is not allowed and/or display a message
-		System.out.println(event.getSource());
 		MyJLabel label = (MyJLabel) event.getSource();
-		label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		LOGGER.debug(String.format("Space selected: %s", label.toString()));
+		processPieceToMove(label);
 	}
 	
 	public void mouseReleased(MouseEvent event) {

@@ -10,12 +10,13 @@ public class Game {
 	private Player player2;
 	
 	public Game() {
-		board = new Board();
-		gui = new Gui(board, getCurrentPlayer());
+		setUpGame();
 	}
 	
 	public void setUpGame() {
+		board = new Board();
 		setUpPlayers();
+		gui = new Gui(board, getCurrentPlayer());
 	}
 	
 	public void setUpPlayers() {
