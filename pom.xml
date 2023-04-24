@@ -3,6 +3,15 @@
   <groupId>chess</groupId>
   <artifactId>chess</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.6</version>
+    </dependency>
+  </dependencies>
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>

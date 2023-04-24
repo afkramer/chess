@@ -11,12 +11,17 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import entities.Board;
 import entities.Player;
 import entities.Space;
 import utility.Utils;
 
 public class Gui implements MouseListener {
+	// Change to slf4j so that I practice that one. See Baeldung article
+	private final Logger LOGGER = LoggerFactory.getLogger(Gui.class);
 	private JFrame frame;
 	private JPanel spacesPanel;
 	private Font f = new Font("serif", Font.PLAIN, 36);
