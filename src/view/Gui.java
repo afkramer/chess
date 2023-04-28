@@ -105,6 +105,12 @@ public class Gui implements MouseListener {
 			// If it is valid, move the piece
 			// If it is not valid, flash red that the move is not allowed and/or display a message
 	
+	
+	// Where should this logic all take place?? How to connect the Gui and Game classes???
+	// TODO: call this method from the Game class 
+		// Change return type to int[] 
+		// If a current space and destination space have been selected, return those coords as int[]
+		// Otherwise return null if the player is still selecting a destination space
 	public void processSelectedGuiSpace(MyJLabel guiSpace) {
 		Space chosenSpace = board.getSpaceByCoords(guiSpace.getxCoord(), guiSpace.getyCoord());
 		
@@ -118,6 +124,7 @@ public class Gui implements MouseListener {
 		} else if (this.originGuiSpace != null && chosenSpace.getIsFree()) {
 			LOGGER.debug(String.format("Passing on to process a move: %s", guiSpace.toString()));
 			processMove(guiSpace);
+			// return int[] with start and finish spaces
 		}
 	}
 	
@@ -144,7 +151,7 @@ public class Gui implements MouseListener {
 			originBoardSpace.getPiece().move(destBoardSpace);
 			originGuiSpace.setText("");
 			unselectOriginGuiSpace(originGuiSpace);
-			drawBoard();
+			game.switchCurrentPlayer();
 		}
 	}
 
