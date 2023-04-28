@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import entities.Board;
+import entities.Game;
 import entities.Player;
 import entities.Space;
 import utility.Utils;
@@ -24,11 +26,13 @@ public class Gui implements MouseListener {
 	private JFrame frame;
 	private JPanel spacesPanel;
 	private Font f = new Font("serif", Font.PLAIN, 36);
+	private Game game;
 	private Board board;
 	private Player currentPlayer;
 	private MyJLabel originGuiSpace;
 	
-	public Gui(Board board, Player currentPlayer) {
+	public Gui(Game game, Board board, Player currentPlayer) {
+		this.game = game;
 		this.board = board;
 		this.currentPlayer = currentPlayer;
 		this.initializeGui();
@@ -101,7 +105,7 @@ public class Gui implements MouseListener {
 			// If it is valid, move the piece
 			// If it is not valid, flash red that the move is not allowed and/or display a message
 	
-	public void processPieceToMove(MyJLabel guiSpace) {
+	public void processSelectedGuiSpace(MyJLabel guiSpace) {
 		Space chosenSpace = board.getSpaceByCoords(guiSpace.getxCoord(), guiSpace.getyCoord());
 		
 		if (!chosenSpace.getIsFree() && this.originGuiSpace == null 
@@ -133,6 +137,15 @@ public class Gui implements MouseListener {
 		LOGGER.debug(String.format("Player wants to move from: %d, %d to %d %d", 
 				this.originGuiSpace.getxCoord(), this.originGuiSpace.getyCoord(), 
 				destinationGuiSpace.getxCoord(), destinationGuiSpace.getyCoord()));
+		Space destBoardSpace = board.getSpaceByCoords(destinationGuiSpace.getxCoord(), destinationGuiSpace.getyCoord());
+		Space originBoardSpace = board.getSpaceByCoords(originGuiSpace.getxCoord(), originGuiSpace.getyCoord());
+		if (originBoardSpace.getPiece().isMoveValid(destBoardSpace)) {
+			destinationGuiSpace.setText(originBoardSpace.getPiece().getPieceType().getPieceString());
+			originBoardSpace.getPiece().move(destBoardSpace);
+			originGuiSpace.setText("");
+			unselectOriginGuiSpace(originGuiSpace);
+			drawBoard();
+		}
 	}
 
 	
@@ -145,7 +158,7 @@ public class Gui implements MouseListener {
 	public void mouseClicked(MouseEvent event) {
 		MyJLabel label = (MyJLabel) event.getSource();
 		LOGGER.debug(String.format("Space selected: %s", label.toString()));
-		processPieceToMove(label);
+		processSelectedGuiSpace(label);
 	}
 	
 	public void mouseReleased(MouseEvent event) {

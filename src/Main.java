@@ -1,3 +1,4 @@
+import entities.Game;
 import view.CLIGui;
 
 public class Main {

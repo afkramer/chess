@@ -1,5 +1,4 @@
-import entities.Board;
-import entities.Player;
+package entities;
 import entities.enums.SpaceColor;
 import view.Gui;
 
@@ -16,7 +15,7 @@ public class Game {
 	public void setUpGame() {
 		board = new Board();
 		setUpPlayers();
-		gui = new Gui(board, getCurrentPlayer());
+		gui = new Gui(this, board, getCurrentPlayer());
 	}
 	
 	public void setUpPlayers() {

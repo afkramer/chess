@@ -1,5 +1,8 @@
 package entities.pieces;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import entities.Board;
 import entities.Space;
 import entities.enums.SpaceColor;
@@ -11,6 +14,7 @@ public abstract class Piece {
 	private Space currentSpace;
 	private SpaceColor color;
 	private PieceType pieceType;
+	private final Logger LOGGER = LoggerFactory.getLogger(Piece.class);
 
 	public Piece(Space currentSpace, SpaceColor color, Board board) {
 		this.board = board;
@@ -18,19 +22,33 @@ public abstract class Piece {
 		this.color = color;
 	}
 	
-	public abstract void move(Space space);
+	public void move(Space targetSpace) {
+		log(String.format("Moved from %d, %d", 
+				getCurrentSpace().getXCoord(), getCurrentSpace().getYCoord()));
+		getCurrentSpace().setIsFree(true);
+		getCurrentSpace().setPiece(null);
+		setCurrentSpace(targetSpace);
+		targetSpace.setIsFree(false);
+		targetSpace.setPiece(this);
+		log(String.format("Moved to %d, %d", targetSpace.getXCoord(), targetSpace.getYCoord()));
+		targetSpace.setIsFree(false);
+	}
 	
 	public abstract boolean isMoveValid(Space space);
+	
+	public void log(String message) {
+		this.LOGGER.debug(message);
+	}
 	
 	public Board getBoard() {
 		return this.board;
 	}
 	
-	public Space getSpace() {
+	public Space getCurrentSpace() {
 		return this.currentSpace;
 	}
 	
-	public void setSpace(Space space) {
+	public void setCurrentSpace(Space space) {
 		this.currentSpace = space;
 	}
 	

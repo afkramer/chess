@@ -52,7 +52,7 @@ public class Board {
 				if (x == 1) {
 					piece = new Pawn(space, SpaceColor.BLACK, this);
 				} else if (x == 6) {
-					piece = new Pawn(space, SpaceColor.WHITE, this);
+					//piece = new Pawn(space, SpaceColor.WHITE, this);
 				} else if ((y == 2 || y == 5) && x == 0) {
 					piece = new Bishop(space, SpaceColor.BLACK, this);
 				} else if ((y == 2 || y == 5) && x == 7) {
