@@ -38,6 +38,8 @@ public class Gui implements MouseListener {
 		this.initializeGui();
 	}
 	
+	//TODO: can I take things out with current player?
+	// The view should only be doing things such as displaying who is up
 	public void setCurrentPlayer(Player player) {
 		this.currentPlayer = player;
 	}

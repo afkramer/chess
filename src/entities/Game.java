@@ -1,15 +1,14 @@
 package entities;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import entities.enums.SpaceColor;
+import entities.pieces.Piece;
 import view.Gui;
 import view.MyJLabel;
 
-public class Game implements MouseListener {
+public class Game {
 	private Logger LOGGER = LoggerFactory.getLogger(Game.class);
 	private Gui gui;
 	private Board board;
@@ -48,35 +47,9 @@ public class Game implements MouseListener {
 	public void startGame() {
 		
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		MyJLabel label = (MyJLabel) e.getSource();
-		LOGGER.debug(String.format("Space selected: %s", label.toString()));
-		gui.processSelectedGuiSpace(label);
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+	
+	public void makeMove(Piece piece, Space destination) {
 		
 	}
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }
