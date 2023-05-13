@@ -7,6 +7,7 @@ import entities.enums.SpaceColor;
 import entities.pieces.Bishop;
 import entities.pieces.Pawn;
 import entities.pieces.Piece;
+import entities.pieces.Queen;
 import entities.pieces.Rook;
 import utility.Utils;
 
@@ -54,14 +55,31 @@ public class Board {
 					piece = new Pawn(space, SpaceColor.BLACK, this);
 				} else if (x == 6) {
 					//piece = new Pawn(space, SpaceColor.WHITE, this);
-				} else if ((y == 2 || y == 5) && x == 0) {
-					piece = new Bishop(space, SpaceColor.BLACK, this);
-				} else if ((y == 2 || y == 5) && x == 7) {
-					piece = new Bishop(space, SpaceColor.WHITE, this);
+					piece = null;
 				} else if ((y == 0 || y == 7) && x == 0) {
 					piece = new Rook(space, SpaceColor.BLACK, this);
 				} else if ((y == 0 || y == 7) && x == 7) {
 					piece = new Rook(space, SpaceColor.WHITE, this);
+				} else if ((y == 1 || y == 6) && x == 0) {
+					//TODO: Black knight
+					piece = null;
+				} else if ((y == 1 || y == 6) && x == 7) {
+					//TODO: White knight
+					piece = null;
+				} else if ((y == 2 || y == 5) && x == 0) {
+					piece = new Bishop(space, SpaceColor.BLACK, this);
+				} else if ((y == 2 || y == 5) && x == 7) {
+					piece = new Bishop(space, SpaceColor.WHITE, this);
+				} else if (y == 3 && x == 0) {
+					//TODO: Black king
+					piece = null;
+				} else if (y == 3 && x == 7) {
+					//TODO: White king
+					piece = null;
+				} else if (y == 4 && x == 0) {
+					piece = new Queen(space, SpaceColor.BLACK, this);
+				} else if (y == 4 && x == 7) {
+					piece = new Queen(space, SpaceColor.WHITE, this);
 				} else {
 					piece = null;
 				}

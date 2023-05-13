@@ -61,4 +61,6 @@ public class Utils {
 				&& yCoord >= Utils.MINIMUM_COORDINATE && yCoord <= Utils.MAXIMUM_COORDINATE;
 	}
 	
+	//TODO: implement methods to check if the move is just one space away
+	
 }
