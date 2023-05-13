@@ -17,16 +17,6 @@ public class Bishop extends Piece {
 		}
 	}
 	
-	public void move(Space targetSpace) {
-		log(String.format("Moved from %d, %d", 
-				super.getCurrentSpace().getXCoord(), super.getCurrentSpace().getYCoord()));
-		this.getCurrentSpace().setIsFree(true);
-		this.setCurrentSpace(targetSpace);
-		log(String.format("Moved to %d, %d", targetSpace.getXCoord(), targetSpace.getYCoord()));
-		targetSpace.setIsFree(false);
-		
-	}
-	
 	public boolean isMoveValid(Space targetSpace) {
 		boolean isValid = false;
 		if (Utils.isDiagonalMove(this.getCurrentSpace(), targetSpace)) {
@@ -38,6 +28,5 @@ public class Bishop extends Piece {
 		log(String.format("Was the move valid: %b", isValid));
 		return isValid;
 	}
-	
 	
 }

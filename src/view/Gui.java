@@ -38,10 +38,9 @@ public class Gui implements MouseListener {
 		this.initializeGui();
 	}
 	
-	//TODO: can I take things out with current player?
-	// The view should only be doing things such as displaying who is up
 	public void setCurrentPlayer(Player player) {
 		this.currentPlayer = player;
+		//TODO: update the view so that it's clear whose turn it is
 	}
 	
 	//TODO: make sure that the board stays square when the screen is resized

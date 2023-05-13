@@ -7,6 +7,7 @@ import entities.enums.SpaceColor;
 import entities.pieces.Bishop;
 import entities.pieces.Pawn;
 import entities.pieces.Piece;
+import entities.pieces.Rook;
 import utility.Utils;
 
 public class Board {
@@ -57,6 +58,10 @@ public class Board {
 					piece = new Bishop(space, SpaceColor.BLACK, this);
 				} else if ((y == 2 || y == 5) && x == 7) {
 					piece = new Bishop(space, SpaceColor.WHITE, this);
+				} else if ((y == 0 || y == 7) && x == 0) {
+					piece = new Rook(space, SpaceColor.BLACK, this);
+				} else if ((y == 0 || y == 7) && x == 7) {
+					piece = new Rook(space, SpaceColor.WHITE, this);
 				} else {
 					piece = null;
 				}
@@ -77,6 +82,7 @@ public class Board {
 	}
 	
 	// Refactor possibility: Both of the following methods use the same code!
+	// Are they even used??
 	//TODO: TEST
 	public void setDiagonalAdjacents(Space space) {
 		int[][] possibleDiagonalAdjacents = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};

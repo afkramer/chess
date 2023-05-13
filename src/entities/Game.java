@@ -38,9 +38,11 @@ public class Game {
 		if (player1.getHasTurn()) {
 			player1.setHasTurn(false);
 			player2.setHasTurn(true);
+			gui.setCurrentPlayer(player2);
 		} else {
 			player1.setHasTurn(true);
 			player2.setHasTurn(false);
+			gui.setCurrentPlayer(player1);
 		}
 	}
 	
@@ -48,8 +50,8 @@ public class Game {
 		
 	}
 	
-	public void makeMove(Piece piece, Space destination) {
-		
+	public void makeMove(Space origin, Space destination) {
+		//TODO: move more of the game logic from the Gui to here so that concerns are better separated
 	}
 
 }
