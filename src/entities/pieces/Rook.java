@@ -20,7 +20,7 @@ public class Rook extends Piece {
 	@Override
 	public boolean isMoveValid(Space targetSpace) {
 		boolean isValid = false;
-		if (Utils.isHorizontalMove(this.getCurrentSpace(), targetSpace)) {
+		if (Utils.isStraightMove(this.getCurrentSpace(), targetSpace)) {
 			if (!this.getBoard().isPieceInHorizontalPath(this.getCurrentSpace(), targetSpace)) {
 				isValid = true;
 			}

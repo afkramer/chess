@@ -35,13 +35,13 @@ public class UtilsTest {
 	public void isHorizontalMoveHappyPathTest() {
 		Space currentSpace = new Space(0, 2);
 		Space targetSpace = new Space(6, 2);
-		Assertions.assertTrue(Utils.isHorizontalMove(currentSpace, targetSpace));
+		Assertions.assertTrue(Utils.isStraightMove(currentSpace, targetSpace));
 	}
 	
 	@Test
 	public void isHorizontalMoveNotHorizontalTest() {
 		Space currentSpace = new Space(3, 6);
 		Space targetSpace = new Space(4, 1);
-		Assertions.assertFalse(Utils.isHorizontalMove(currentSpace, targetSpace));
+		Assertions.assertFalse(Utils.isStraightMove(currentSpace, targetSpace));
 	}
 }

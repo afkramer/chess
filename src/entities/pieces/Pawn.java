@@ -6,6 +6,7 @@ import entities.enums.SpaceColor;
 import entities.enums.PieceType;
 
 public class Pawn extends Piece {
+	private boolean isFirstMove = true;
 	
 	public Pawn(Space currentSpace, SpaceColor color, Board board) {
 		super(currentSpace, color, board);
@@ -16,8 +17,12 @@ public class Pawn extends Piece {
 		}
 	}
 	
-	public void move(Space targetSpace) {
-		
+	public boolean isFirstMove() {
+		return isFirstMove;
+	}
+
+	public void setFirstMove(boolean isFirstMove) {
+		this.isFirstMove = isFirstMove;
 	}
 	
 	public boolean isMoveValid(Space targetSpace) {

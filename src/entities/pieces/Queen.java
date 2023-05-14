@@ -23,7 +23,7 @@ public class Queen extends Piece {
 			if (!this.getBoard().isPieceInDiagonalPath(this.getCurrentSpace(), targetSpace)) {
 				isValid = true;
 			}
-		} else if (Utils.isHorizontalMove(this.getCurrentSpace(), targetSpace)) {
+		} else if (Utils.isStraightMove(this.getCurrentSpace(), targetSpace)) {
 			if (!this.getBoard().isPieceInHorizontalPath(this.getCurrentSpace(), targetSpace)) {
 				isValid = true;
 			}
