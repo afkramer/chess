@@ -37,6 +37,9 @@ public abstract class Piece {
 	
 	public abstract boolean isMoveValid(Space targetSpace);
 	
+	// This method is so that we can track the pawns' first moves
+	public abstract void moved();
+	
 	public void log(String message) {
 		this.LOGGER.debug(message);
 	}

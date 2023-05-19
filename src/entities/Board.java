@@ -17,6 +17,7 @@ import utility.Utils;
 
 public class Board {
 	private Space[] spaces = new Space[Utils.TOTAL_SPACES];
+	// TODO: will need to have a method for taking pieces back out of the array when they are captured
 	private List<Piece> pieces = new ArrayList<>();
 	private Piece blackKing;
 	private Piece whiteKing;
@@ -119,7 +120,6 @@ public class Board {
 		return false;
 	}
 	
-	
 	// Refactor possibility: Both of the following methods use the same code!
 	// Are they even used??
 	//TODO: TEST
@@ -187,7 +187,6 @@ public class Board {
 		return false;
 	}
 	
-	
 	public boolean isPieceInStraightPath(SpaceColor currentColor, Space currentSpace, Space targetSpace) {
 		while (currentSpace.getXCoord() != targetSpace.getXCoord() && currentSpace.getYCoord() != targetSpace.getYCoord()) {
 			currentSpace = moveOneSpaceStraight(currentSpace, targetSpace);
@@ -205,14 +204,12 @@ public class Board {
 		return false;
 	}
 	
-	public boolean isPieceCaptured() {
-		if (true) {
+	public boolean isPieceCaptured(SpaceColor currentColor, Space targetSpace) {
+		if (targetSpace.getPiece() != null && targetSpace.getPiece().getColor() != currentColor) {
 			return true;
 		}
 		return false;
 	}
-	
-	//TODO: write a method that determines if a piece is captured during the move
 	
 	public Space moveOneSpaceDiagonal(Space currentSpace, Space targetSpace) {
 		if (Utils.areValidCoords(targetSpace.getXCoord(), targetSpace.getYCoord())) {

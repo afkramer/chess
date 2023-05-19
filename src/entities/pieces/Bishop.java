@@ -30,4 +30,7 @@ public class Bishop extends Piece {
 		return isValid;
 	}
 	
+	@Override
+	public void moved() {}
+	
 }

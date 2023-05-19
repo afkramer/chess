@@ -122,7 +122,8 @@ public class Gui implements MouseListener {
 		} else if (this.originGuiSpace == guiSpace) {
 			LOGGER.debug(String.format("Unselecting Gui space: %s", guiSpace.toString()));
 			unselectOriginGuiSpace(guiSpace);
-		} else if (this.originGuiSpace != null && chosenSpace.getIsFree()) {
+		} else if (this.originGuiSpace != null && 
+				(chosenSpace.getIsFree() || board.isPieceCaptured(currentPlayer.getColor(), chosenSpace))) {
 			LOGGER.debug(String.format("Passing on to process a move: %s", guiSpace.toString()));
 			processMove(guiSpace);
 			// return int[] with start and finish spaces
@@ -141,6 +142,8 @@ public class Gui implements MouseListener {
 		this.originGuiSpace = null;
 	}
 	
+	// TODO: this needs to include logic for capturing pieces!
+	// Method is too long. How can I break it up into smaller methods
 	public void processMove(MyJLabel destinationGuiSpace) {
 		LOGGER.debug(String.format("Player wants to move from: %d, %d to %d %d", 
 				this.originGuiSpace.getxCoord(), this.originGuiSpace.getyCoord(), 
@@ -150,6 +153,7 @@ public class Gui implements MouseListener {
 		if (originBoardSpace.getPiece().isMoveValid(destBoardSpace)) {
 			destinationGuiSpace.setText(originBoardSpace.getPiece().getPieceType().getPieceString());
 			originBoardSpace.getPiece().move(destBoardSpace);
+			destBoardSpace.getPiece().moved();
 			originGuiSpace.setText("");
 			unselectOriginGuiSpace(originGuiSpace);
 			game.switchCurrentPlayer();

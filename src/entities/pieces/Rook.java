@@ -29,4 +29,6 @@ public class Rook extends Piece {
 		return isValid;
 	}
 	
+	@Override
+	public void moved() {}
 }

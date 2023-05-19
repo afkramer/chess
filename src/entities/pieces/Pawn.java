@@ -26,12 +26,14 @@ public class Pawn extends Piece {
 		this.isFirstMove = isFirstMove;
 	}
 	
+	@Override
 	public boolean isMoveValid(Space targetSpace) {
 		boolean isValidMove = false;
 		
 		boolean isValidFirstMove = isValidFirstMove(targetSpace);
+		boolean isValidCapturingMove = isValidCapturingMove(targetSpace);
 		
-		if (isValidFirstMove) {
+		if (isValidFirstMove || isValidCapturingMove) {
 			isValidMove = true;
 		}
 		
@@ -44,8 +46,7 @@ public class Pawn extends Piece {
 		boolean isVertical = Utils.isVerticalMove(this.getCurrentSpace(), targetSpace);
 		boolean isValidNumOfSpaces = Utils.numberOfSpacesMoved(this.getCurrentSpace(), targetSpace) == 1 
 				|| Utils.numberOfSpacesMoved(targetSpace, targetSpace) == 2;
-		//TODO: update this after method is updated in Utils class
-		boolean isPieceCaptured = false;
+		boolean isPieceCaptured = this.getBoard().isPieceCaptured(this.getColor(), targetSpace);
 		
 		if (this.isFirstMove && isVertical && isValidNumOfSpaces && !isPieceCaptured) {
 			isValidMove = true;
@@ -59,9 +60,17 @@ public class Pawn extends Piece {
 		
 		boolean isDiagonal = Utils.isDiagonalMove(this.getCurrentSpace(), targetSpace);
 		boolean isValidNumOfSpaces = Utils.numberOfSpacesMoved(this.getCurrentSpace(), targetSpace) == 1;
-		//TODO: update this after method is updated in Utils class
-		boolean isPieceCaptured = true;
+		boolean isPieceCaptured = this.getBoard().isPieceCaptured(this.getColor(), targetSpace);
+		
+		if (isDiagonal && isValidNumOfSpaces && isPieceCaptured) {
+			isValidMove = true;
+		}
 		
 		return isValidMove;
+	}
+	
+	@Override
+	public void moved() {
+		this.setFirstMove(false);
 	}
 }

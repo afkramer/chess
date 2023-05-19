@@ -22,4 +22,7 @@ public class King extends Piece {
 		return false;
 	}
 
+	@Override
+	public void moved() {}
+
 }

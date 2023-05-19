@@ -31,5 +31,7 @@ public class Queen extends Piece {
 		
 		return isValid;
 	}
-
+	
+	@Override
+	public void moved() {}
 }
