@@ -3,6 +3,7 @@ package entities.pieces;
 import entities.Board;
 import entities.Space;
 import entities.enums.SpaceColor;
+import utility.Utils;
 import entities.enums.PieceType;
 
 public class Pawn extends Piece {
@@ -26,6 +27,41 @@ public class Pawn extends Piece {
 	}
 	
 	public boolean isMoveValid(Space targetSpace) {
-		return false;
+		boolean isValidMove = false;
+		
+		boolean isValidFirstMove = isValidFirstMove(targetSpace);
+		
+		if (isValidFirstMove) {
+			isValidMove = true;
+		}
+		
+		return isValidMove;
+	}
+	
+	public boolean isValidFirstMove(Space targetSpace) {
+		boolean isValidMove = false;
+		
+		boolean isVertical = Utils.isVerticalMove(this.getCurrentSpace(), targetSpace);
+		boolean isValidNumOfSpaces = Utils.numberOfSpacesMoved(this.getCurrentSpace(), targetSpace) == 1 
+				|| Utils.numberOfSpacesMoved(targetSpace, targetSpace) == 2;
+		//TODO: update this after method is updated in Utils class
+		boolean isPieceCaptured = false;
+		
+		if (this.isFirstMove && isVertical && isValidNumOfSpaces && !isPieceCaptured) {
+			isValidMove = true;
+		}
+		
+		return isValidMove;
+	}
+	
+	public boolean isValidCapturingMove(Space targetSpace) {
+		boolean isValidMove = false;
+		
+		boolean isDiagonal = Utils.isDiagonalMove(this.getCurrentSpace(), targetSpace);
+		boolean isValidNumOfSpaces = Utils.numberOfSpacesMoved(this.getCurrentSpace(), targetSpace) == 1;
+		//TODO: update this after method is updated in Utils class
+		boolean isPieceCaptured = true;
+		
+		return isValidMove;
 	}
 }

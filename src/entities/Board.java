@@ -1,10 +1,14 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import entities.enums.SpaceColor;
 import entities.pieces.Bishop;
+import entities.pieces.King;
 import entities.pieces.Pawn;
 import entities.pieces.Piece;
 import entities.pieces.Queen;
@@ -13,7 +17,11 @@ import utility.Utils;
 
 public class Board {
 	private Space[] spaces = new Space[Utils.TOTAL_SPACES];
+	private List<Piece> pieces = new ArrayList<>();
+	private Piece blackKing;
+	private Piece whiteKing;
 	private final Logger LOGGER = LoggerFactory.getLogger(Board.class);
+	
 	
 	
 	public Board() {
@@ -71,11 +79,11 @@ public class Board {
 				} else if ((y == 2 || y == 5) && x == 7) {
 					piece = new Bishop(space, SpaceColor.WHITE, this);
 				} else if (y == 3 && x == 0) {
-					//TODO: Black king
-					piece = null;
+					piece = new King(space, SpaceColor.BLACK, this);
+					blackKing = piece;
 				} else if (y == 3 && x == 7) {
-					//TODO: White king
-					piece = null;
+					piece = new King(space, SpaceColor.WHITE, this);
+					whiteKing = piece;
 				} else if (y == 4 && x == 0) {
 					piece = new Queen(space, SpaceColor.BLACK, this);
 				} else if (y == 4 && x == 7) {
@@ -85,6 +93,7 @@ public class Board {
 				}
 				
 				if (piece != null) {
+					pieces.add(piece);
 					space.setPiece(piece);
 					space.setIsFree(false);
 				}
@@ -98,6 +107,18 @@ public class Board {
 			setLinearAdjacents(space);
 		}
 	}
+	
+	public boolean canKingBeCaptured(Player currentPlayer) {
+		Piece currentKing = currentPlayer.getColor() == SpaceColor.BLACK ? blackKing : whiteKing;
+		
+		for (Piece piece : pieces) {
+			if (piece.isMoveValid(currentKing.getCurrentSpace())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	// Refactor possibility: Both of the following methods use the same code!
 	// Are they even used??
@@ -167,6 +188,8 @@ public class Board {
 		
 		return false;
 	}
+	
+	//TODO: write a method that determines if a piece is captured during the move
 	
 	public Space moveOneSpaceDiagonal(Space currentSpace, Space targetSpace) {
 		if (Utils.areValidCoords(targetSpace.getXCoord(), targetSpace.getYCoord())) {
