@@ -167,25 +167,48 @@ public class Board {
 		return false;
 	}
 	
-	public boolean isPieceInDiagonalPath(Space currentSpace, Space targetSpace) {
+	//TODO: is there a way to combine isPieceInDiagonalPath and isPieceInStraightPath?
+	// The only difference is how the space is moved forward to be checked for a piece in the path
+	public boolean isPieceInDiagonalPath(SpaceColor currentColor, Space currentSpace, Space targetSpace) {
 		while (currentSpace.getXCoord() != targetSpace.getXCoord() && currentSpace.getYCoord() != targetSpace.getYCoord()) {
 			currentSpace = moveOneSpaceDiagonal(currentSpace, targetSpace);
-			if (!currentSpace.getIsFree()) {
+			// It is only not allowed for the piece to be in the path
+			// If a piece is on targetSpace then the piece will be captured
+			if (!currentSpace.getIsFree() && currentSpace != targetSpace) {
 				return true;
+			} else if (currentSpace == targetSpace && currentSpace.getPiece() != null) {
+				// A player may not land on his or her own piece
+				if (currentSpace.getPiece().getColor() == currentColor) {
+					return true;
+				}
 			}
 		}
 		
 		return false;
 	}
 	
-	public boolean isPieceInHorizontalPath(Space currentSpace, Space targetSpace) {
+	
+	public boolean isPieceInStraightPath(SpaceColor currentColor, Space currentSpace, Space targetSpace) {
 		while (currentSpace.getXCoord() != targetSpace.getXCoord() && currentSpace.getYCoord() != targetSpace.getYCoord()) {
-			currentSpace = moveOneSpaceHorizontal(currentSpace, targetSpace);
-			if (!currentSpace.getIsFree()) {
+			currentSpace = moveOneSpaceStraight(currentSpace, targetSpace);
+			// It is only not allowed for the piece to be in the path
+			// If a piece is on targetSpace then the piece will be captured
+			if (!currentSpace.getIsFree() && currentSpace != targetSpace) {
 				return true;
+			} else if (currentSpace == targetSpace && currentSpace.getPiece() != null) {
+				if (currentSpace.getPiece().getColor() == currentColor) {
+					return true;
+				}
 			}
 		}
 		
+		return false;
+	}
+	
+	public boolean isPieceCaptured() {
+		if (true) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -218,7 +241,7 @@ public class Board {
 		
 	}
 	
-	public Space moveOneSpaceHorizontal(Space currentSpace, Space targetSpace) {
+	public Space moveOneSpaceStraight(Space currentSpace, Space targetSpace) {
 		if (Utils.areValidCoords(targetSpace.getXCoord(), targetSpace.getYCoord())) {
 			int totalXShift = targetSpace.getXCoord() - currentSpace.getXCoord();
 			int totalYShift = targetSpace.getYCoord() - currentSpace.getYCoord();

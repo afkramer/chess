@@ -20,11 +20,11 @@ public class Queen extends Piece {
 	public boolean isMoveValid(Space targetSpace) {
 		boolean isValid = false;
 		if (Utils.isDiagonalMove(this.getCurrentSpace(), targetSpace)) {
-			if (!this.getBoard().isPieceInDiagonalPath(this.getCurrentSpace(), targetSpace)) {
+			if (!this.getBoard().isPieceInDiagonalPath(this.getColor(), this.getCurrentSpace(), targetSpace)) {
 				isValid = true;
 			}
 		} else if (Utils.isStraightMove(this.getCurrentSpace(), targetSpace)) {
-			if (!this.getBoard().isPieceInHorizontalPath(this.getCurrentSpace(), targetSpace)) {
+			if (!this.getBoard().isPieceInStraightPath(this.getColor(), this.getCurrentSpace(), targetSpace)) {
 				isValid = true;
 			}
 		}

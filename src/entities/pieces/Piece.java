@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import entities.Board;
+import entities.Player;
 import entities.Space;
 import entities.enums.SpaceColor;
 import entities.enums.PieceType;
@@ -34,7 +35,7 @@ public abstract class Piece {
 		targetSpace.setIsFree(false);
 	}
 	
-	public abstract boolean isMoveValid(Space space);
+	public abstract boolean isMoveValid(Space targetSpace);
 	
 	public void log(String message) {
 		this.LOGGER.debug(message);

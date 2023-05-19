@@ -21,7 +21,7 @@ public class Bishop extends Piece {
 		boolean isValid = false;
 		if (Utils.isDiagonalMove(this.getCurrentSpace(), targetSpace)) {
 			// only if the move is diagonal, check if there are pieces in the path
-			if (!this.getBoard().isPieceInDiagonalPath(this.getCurrentSpace(), targetSpace)
+			if (!this.getBoard().isPieceInDiagonalPath(this.getColor(), this.getCurrentSpace(), targetSpace)
 					&& Utils.areValidCoords(targetSpace.getXCoord(), targetSpace.getYCoord())) {
 				isValid = true;
 			} 
