@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import entities.Board;
-import entities.Player;
 import entities.Space;
 import entities.enums.SpaceColor;
 import entities.enums.PieceType;
@@ -26,13 +25,15 @@ public abstract class Piece {
 	public void move(Space targetSpace) {
 		log(String.format("Moved from %d, %d", 
 				getCurrentSpace().getXCoord(), getCurrentSpace().getYCoord()));
-		getCurrentSpace().setIsFree(true);
-		getCurrentSpace().setPiece(null);
+		
+		if (board.isPieceCaptured(this.color, targetSpace)) {
+			LOGGER.debug(this + " is capturing " + targetSpace.getPiece());
+			board.capturePiece(targetSpace.getPiece());
+		}
+		
+		getCurrentSpace().clearSpace();
 		setCurrentSpace(targetSpace);
-		targetSpace.setIsFree(false);
-		targetSpace.setPiece(this);
 		log(String.format("Moved to %d, %d", targetSpace.getXCoord(), targetSpace.getYCoord()));
-		targetSpace.setIsFree(false);
 	}
 	
 	public abstract boolean isMoveValid(Space targetSpace);
@@ -54,6 +55,7 @@ public abstract class Piece {
 	
 	public void setCurrentSpace(Space space) {
 		this.currentSpace = space;
+		space.setPiece(this);
 	}
 	
 	public SpaceColor getColor() {

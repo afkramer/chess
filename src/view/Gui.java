@@ -38,11 +38,6 @@ public class Gui implements MouseListener {
 		this.initializeGui();
 	}
 	
-	public void setCurrentPlayer(Player player) {
-		this.currentPlayer = player;
-		//TODO: update the view so that it's clear whose turn it is
-	}
-	
 	//TODO: make sure that the board stays square when the screen is resized
 	public void initializeGui() {
 		frame = new JFrame();
@@ -95,6 +90,11 @@ public class Gui implements MouseListener {
 		frame.getContentPane().add(BorderLayout.CENTER, spacesPanel);
 	}
 	
+	public void setCurrentPlayer(Player player) {
+		this.currentPlayer = player;
+		//TODO: update the view so that it's clear whose turn it is
+	}
+	
 	// TODO: this method should pass on the x and y coordinates
 	// First validate whether a piece has been chosen of the color of the current player
 		// If no piece has been selected, wait for a piece to be selected
@@ -117,7 +117,7 @@ public class Gui implements MouseListener {
 		
 		if (!chosenSpace.getIsFree() && this.originGuiSpace == null 
 				&& chosenSpace.getPiece().getColor() == this.currentPlayer.getColor()) {
-			LOGGER.debug(String.format("Selecting Gui space: %s", guiSpace.toString()));
+			LOGGER.debug(String.format("Selecting " + chosenSpace.getPiece().getPieceType() + " to move on space: %s", guiSpace.toString()));
 			selectOriginGuiSpace(guiSpace);	
 		} else if (this.originGuiSpace == guiSpace) {
 			LOGGER.debug(String.format("Unselecting Gui space: %s", guiSpace.toString()));
@@ -127,6 +127,7 @@ public class Gui implements MouseListener {
 			LOGGER.debug(String.format("Passing on to process a move: %s", guiSpace.toString()));
 			processMove(guiSpace);
 			// return int[] with start and finish spaces
+			game.switchCurrentPlayer();
 		}
 	}
 	
@@ -142,24 +143,27 @@ public class Gui implements MouseListener {
 		this.originGuiSpace = null;
 	}
 	
-	// TODO: this needs to include logic for capturing pieces!
-	// Method is too long. How can I break it up into smaller methods
 	public void processMove(MyJLabel destinationGuiSpace) {
 		LOGGER.debug(String.format("Player wants to move from: %d, %d to %d %d", 
 				this.originGuiSpace.getxCoord(), this.originGuiSpace.getyCoord(), 
 				destinationGuiSpace.getxCoord(), destinationGuiSpace.getyCoord()));
 		Space destBoardSpace = board.getSpaceByCoords(destinationGuiSpace.getxCoord(), destinationGuiSpace.getyCoord());
 		Space originBoardSpace = board.getSpaceByCoords(originGuiSpace.getxCoord(), originGuiSpace.getyCoord());
+		
 		if (originBoardSpace.getPiece().isMoveValid(destBoardSpace)) {
 			destinationGuiSpace.setText(originBoardSpace.getPiece().getPieceType().getPieceString());
 			originBoardSpace.getPiece().move(destBoardSpace);
 			destBoardSpace.getPiece().moved();
 			originGuiSpace.setText("");
 			unselectOriginGuiSpace(originGuiSpace);
-			game.switchCurrentPlayer();
 		}
 	}
 
+	public void mouseClicked(MouseEvent event) {
+		MyJLabel label = (MyJLabel) event.getSource();
+		LOGGER.debug(String.format("Space selected: %s", label.toString()));
+		processSelectedGuiSpace(label);
+	}
 	
 	public void mouseEntered(MouseEvent event) {
 	}
@@ -167,19 +171,10 @@ public class Gui implements MouseListener {
 	public void mousePressed(MouseEvent event) {
 	}
 	
-	public void mouseClicked(MouseEvent event) {
-		MyJLabel label = (MyJLabel) event.getSource();
-		LOGGER.debug(String.format("Space selected: %s", label.toString()));
-		processSelectedGuiSpace(label);
-	}
-	
 	public void mouseReleased(MouseEvent event) {
 	}
 	
 	public void mouseExited(MouseEvent event) {
 	}
-	
-	public void updateBoard() {
-		
-	}
+
 }

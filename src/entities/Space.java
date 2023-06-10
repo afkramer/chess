@@ -32,6 +32,11 @@ public class Space {
 		this(xCoord, yCoord, null, null, null);
 	}
 	
+	public void clearSpace() {
+		setIsFree(true);
+		setPiece(null);
+	}
+	
 	public int getXCoord() {
 		return this.xCoord;
 	}
@@ -94,5 +99,6 @@ public class Space {
 	
 	public void setPiece(Piece piece) {
 		this.piece = piece;
+		setIsFree(false);
 	}
 }

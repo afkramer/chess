@@ -17,8 +17,8 @@ import utility.Utils;
 
 public class Board {
 	private Space[] spaces = new Space[Utils.TOTAL_SPACES];
-	// TODO: will need to have a method for taking pieces back out of the array when they are captured
-	private List<Piece> pieces = new ArrayList<>();
+	private List<Piece> activePieces = new ArrayList<>();
+	private List<Piece> capturedPieces = new ArrayList<>();
 	private Piece blackKing;
 	private Piece whiteKing;
 	private final Logger LOGGER = LoggerFactory.getLogger(Board.class);
@@ -94,7 +94,7 @@ public class Board {
 				}
 				
 				if (piece != null) {
-					pieces.add(piece);
+					activePieces.add(piece);
 					space.setPiece(piece);
 					space.setIsFree(false);
 				}
@@ -112,7 +112,7 @@ public class Board {
 	public boolean canKingBeCaptured(Player currentPlayer) {
 		Piece currentKing = currentPlayer.getColor() == SpaceColor.BLACK ? blackKing : whiteKing;
 		
-		for (Piece piece : pieces) {
+		for (Piece piece : activePieces) {
 			if (piece.isMoveValid(currentKing.getCurrentSpace())) {
 				return true;
 			}
@@ -263,6 +263,13 @@ public class Board {
 			return currentSpace;
 		}
 		
+	}
+	
+	public void capturePiece(Piece piece) {
+		LOGGER.debug("Adding piece " + piece + " to the captured pieces list.");
+		this.capturedPieces.add(piece);
+		LOGGER.debug("Removing piece " + piece + " from the active pieces list.");
+		this.activePieces.remove(piece);
 	}
 
 }

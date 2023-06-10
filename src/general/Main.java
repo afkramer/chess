@@ -1,3 +1,4 @@
+package general;
 import entities.Game;
 import view.CLIGui;
 
