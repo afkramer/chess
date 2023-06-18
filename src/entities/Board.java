@@ -109,7 +109,13 @@ public class Board {
 		}
 	}
 	
-	public boolean canKingBeCaptured(Player currentPlayer) {
+	/**
+	 * Determines whether the king is under check
+	 * 
+	 * @param currentPlayer
+	 * @return	true if the king is under check, false if not
+	 */
+	public boolean isKingUnderCheck(Player currentPlayer) {
 		Piece currentKing = currentPlayer.getColor() == SpaceColor.BLACK ? blackKing : whiteKing;
 		
 		for (Piece piece : activePieces) {
@@ -118,6 +124,17 @@ public class Board {
 			}
 		}
 		return false;
+	}
+	
+	//TODO
+	public boolean isKingUnderCheckmate(Player currentPlayer) {
+		Piece currentKing = currentPlayer.getColor() == SpaceColor.BLACK ? blackKing : whiteKing;
+		Space currentSpace = currentKing.getCurrentSpace();
+		List<Space> allPossibleMoves = new ArrayList<>();
+		allPossibleMoves.addAll(currentSpace.getDiagonalAdjacents());
+		allPossibleMoves.addAll(currentSpace.getLinearAdjacents());
+		
+		return allPossibleMoves.stream().allMatch(space -> this.reachableByOpponent(space));
 	}
 	
 	// Refactor possibility: Both of the following methods use the same code!
@@ -145,6 +162,20 @@ public class Board {
 				space.addLinearAdjacent(getSpaceByCoords(xCoord, yCoord));
 			}
 		}
+	}
+	
+	public boolean reachableByOpponent(Space space) {
+		boolean reachableByOpponent = false;
+		Piece pieceOnSpace = space.getPiece();
+		
+		if (pieceOnSpace != null) {
+			for (Piece piece : activePieces) {
+				if (piece.isMoveValid(space)) {
+					reachableByOpponent = true;
+				}
+			}
+		}
+		return reachableByOpponent;
 	}
 	
 	
