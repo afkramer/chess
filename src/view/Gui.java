@@ -143,6 +143,10 @@ public class Gui implements MouseListener {
 		this.originGuiSpace = null;
 	}
 	
+	//TODO: could probably split this up
+	// first step -> pass on information to the game
+	// Get a response back about what to do
+	// Send a response back to the game about the result
 	public void processMove(MyJLabel destinationGuiSpace) {
 		LOGGER.debug(String.format("Player wants to move from: %d, %d to %d %d", 
 				this.originGuiSpace.getxCoord(), this.originGuiSpace.getyCoord(), 

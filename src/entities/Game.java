@@ -50,6 +50,10 @@ public class Game {
 		
 	}
 	
+	public boolean isGameOver() {
+		return board.isKingUnderCheckmate(getCurrentPlayer().getColor());
+	}
+	
 	public void makeMove(Space origin, Space destination) {
 		//TODO: move more of the game logic from the Gui to here so that concerns are better separated
 	}

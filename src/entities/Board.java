@@ -115,8 +115,8 @@ public class Board {
 	 * @param currentPlayer
 	 * @return	true if the king is under check, false if not
 	 */
-	public boolean isKingUnderCheck(Player currentPlayer) {
-		Piece currentKing = currentPlayer.getColor() == SpaceColor.BLACK ? blackKing : whiteKing;
+	public boolean isKingUnderCheck(SpaceColor playerColor) {
+		Piece currentKing = playerColor == SpaceColor.BLACK ? blackKing : whiteKing;
 		
 		for (Piece piece : activePieces) {
 			if (piece.isMoveValid(currentKing.getCurrentSpace())) {
@@ -127,8 +127,8 @@ public class Board {
 	}
 	
 	//TODO
-	public boolean isKingUnderCheckmate(Player currentPlayer) {
-		Piece currentKing = currentPlayer.getColor() == SpaceColor.BLACK ? blackKing : whiteKing;
+	public boolean isKingUnderCheckmate(SpaceColor playerColor) {
+		Piece currentKing = playerColor == SpaceColor.BLACK ? blackKing : whiteKing;
 		Space currentSpace = currentKing.getCurrentSpace();
 		List<Space> allPossibleMoves = new ArrayList<>();
 		allPossibleMoves.addAll(currentSpace.getDiagonalAdjacents());
