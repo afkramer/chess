@@ -8,6 +8,7 @@ import utility.Utils;
 
 public class Bishop extends Piece {
 	
+	//TODO: instead of setters, use super.constructor()
 	public Bishop(Space currentSpace, SpaceColor color, Board board) {
 		super(currentSpace, color, board);
 		if (color == SpaceColor.WHITE) {

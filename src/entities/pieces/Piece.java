@@ -16,6 +16,7 @@ public abstract class Piece {
 	private PieceType pieceType;
 	private final Logger LOGGER = LoggerFactory.getLogger(Piece.class);
 
+	// TODO: expand the constructor to set SpaceColor and PieceType as well
 	public Piece(Space currentSpace, SpaceColor color, Board board) {
 		this.board = board;
 		this.currentSpace = currentSpace;

@@ -24,7 +24,7 @@ public class Board {
 	private final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 	
 	
-	
+	// These methods should be private
 	public Board() {
 		this.initBoard();
 		this.initPieces();
@@ -54,6 +54,9 @@ public class Board {
 	//TODO: I hard code a lot of the coordinates for where pieces should be
 	// Is there a better way to set up the pieces?
 	// This method also got pretty long
+	//TODO: you could try making a factory with builder -> but this is more code and so just for practicing!!
+	// Factory -> decides which piece to generate based on PieceType -> this would be the director -> I need a pawn
+	// Builder -> in the factory -> sets the actual variables that are needed for the piece -> It should be black
 	public void initPieces() {
 		Piece piece = null;
 		Space space;
